@@ -1,4 +1,39 @@
-body
+*
 {
-  background: red;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.grid
+{
+  display: grid;
+}
+
+.col-1
+{
+  grid-template-columns: repeat(1,1fr);
+}
+
+.col-2
+{
+  grid-template-columns: repeat(2,1fr);
+}
+
+.col-3
+{
+  grid-template-columns: repeat(3,1fr);
+}
+
+.col-4
+{
+  grid-template-columns: repeat(4,1fr);
+}
+
+#homePage
+{
+  justify-items: center;
+  align-items: end;
+  color: rgb(158, 128, 52);
+  padding-bottom: 20px;
 }

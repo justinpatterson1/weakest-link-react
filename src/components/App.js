@@ -1,9 +1,9 @@
-
 import '../css/App.css';
+import HomePage from '../components/HomePage.js';
 
 function App() {
   return (
-   <h1>Hi</h1>
+    <HomePage/>
   );
 }
 
