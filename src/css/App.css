@@ -115,10 +115,22 @@
 #characterDisplay
 {
   grid-area:characterDisplay ;
-  
+  background-color: palevioletred;
   
 }
 
+#characterDisplay > div
+{
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+#characterDisplay > div > img
+{
+  height: 400px;
+}
 
 #gameScreen
 {
@@ -129,7 +141,7 @@
 #actionBtn
 {
   grid-area:actionBtn;
- 
+ background-color: peru;
 }
 
 .cash-div
@@ -148,4 +160,11 @@
 {
   margin: 0 auto;
   width: 70%;
+}
+
+#screen
+{
+  background-color: black;
+  height: 250px;
+  width: 100%;
 }

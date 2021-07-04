@@ -8,8 +8,10 @@ import GameScreen from '../components/GameScreen'
 import GameDisplayContext from '../context/GameDisplayContext';
 import RoundOneCashContext from '../context/RoundOneCashContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
+import ResultButtonContext from "../context/ResultButtonContext";
 
 function App() {
+const [resultButton,setResultButton] = useState([]);
 const [characterDisplay,setCharacterDisplay] = useState({id:0,img:'stickman.png'});
 const [characterPage,setCharacterPage] = useState({visible:true});
 const [roundOneCash,setRoundOneCash] = useState([
@@ -80,12 +82,13 @@ const [character,setCharacter] = useState([
         <CharacterContext.Provider value={{character,setCharacter}}>
           <RoundOneCashContext.Provider value={{roundOneCash,setRoundOneCash}}>
             <CharacterDisplayContext.Provider value={{characterDisplay,setCharacterDisplay}}>
+              <ResultButtonContext.Provider value={{resultButton,setResultButton}}>
 
-            
-       
+                 
              <CharacterPage/>
              <GameScreen/>
 
+              </ResultButtonContext.Provider>
              </CharacterDisplayContext.Provider>
           </RoundOneCashContext.Provider>
         </CharacterContext.Provider>
