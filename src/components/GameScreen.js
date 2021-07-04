@@ -2,6 +2,7 @@ import React,{useContext,useEffect,useState} from 'react';
 import RoundOneCash from '../components/RoundOneCash';
 import RoundOneCashContext from '../context/RoundOneCashContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
+import ResultButtonContext from '../context/ResultButtonContext';
 
 
 const GameScreen = () => {
@@ -10,6 +11,7 @@ const GameScreen = () => {
     const {characterDisplay} = useContext(CharacterDisplayContext);
     const [correctAnswer,setCorrectAnswer] = useState('');
     const [wrongAnswer,setWrongAnswer] = useState([])
+    const {resultButton,setResultButton} = useContext(ResultButtonContext)
     const image = require(`../images/${characterDisplay.img}`).default;
    
     useEffect(()=>{
@@ -21,12 +23,24 @@ const GameScreen = () => {
         .then((json)=>{
             setCorrectAnswer(json.results[0].correct_answer)
             setWrongAnswer(json.results[0].incorrect_answers)
+
+            const answer = correctAnswer;
+
+            const choices = [...wrongAnswer];
+            
+            choices.push(answer);
+            setResultButton(choices);
+
+            console.log(answer)
+            console.log(choices)
         })
         .catch(err=>console.log(err))
     },[])
 
+    console.log(resultButton)
     console.log(`correct:${correctAnswer}`)
     console.log(`incorrect:${wrongAnswer}`)
+    console.log(`resultButton:${resultButton}`)
     return (
         <div className="gameDisplay">
             <div id="moneyDiv">
