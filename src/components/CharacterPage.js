@@ -23,7 +23,7 @@ const CharacterPage = () => {
         <div className={characterPage.visible === true?"":"hide"} id="characterPage" style={selectionBG}>
             <div id="characterDiv" className="grid col-6" >
               {
-                character.map((char)=>(<Character Key={char.id} image={char.img} />))
+                character.map((char)=>(<Character Key={char.id} id={char.id} image={char.img} />))
               }
              </div>
         </div>

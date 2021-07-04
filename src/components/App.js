@@ -4,13 +4,13 @@ import CharacterPage from '../components/CharacterPage.js'
 import {useState} from 'react';
 import CharacterContext from '../context/CharacterContext';
 import CharacterPageContext from '../context/CharacterPageContext'
-import GameDisplay from '../components/GameDisplay'
-import GameDisplayContext from '../context/GameDIsplayContext';
+import GameScreen from '../components/GameScreen'
+import GameDisplayContext from '../context/GameDisplayContext';
 import RoundOneCashContext from '../context/RoundOneCashContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
 
 function App() {
-const [characterDisplay,setCharacterDisplay] = useState({})
+const [characterDisplay,setCharacterDisplay] = useState({id:0,img:'stickman.png'});
 const [characterPage,setCharacterPage] = useState({visible:true});
 const [roundOneCash,setRoundOneCash] = useState([
   {
@@ -84,8 +84,8 @@ const [character,setCharacter] = useState([
             
        
              <CharacterPage/>
-             <GameDisplay/>
-             
+             <GameScreen/>
+
              </CharacterDisplayContext.Provider>
           </RoundOneCashContext.Provider>
         </CharacterContext.Provider>

@@ -1,10 +1,12 @@
 import React,{useContext} from 'react';
 import CharacterPageContext from '../context/CharacterPageContext';
+import CharacterDisplayContext from '../context/CharacterDisplayContext';
 
 
 const Character = (props) => {
 
     const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
+    const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
     const image = require(`../images/${props.image}`).default
 
     const characterBG=
@@ -24,11 +26,13 @@ const Character = (props) => {
         <div className="character"  onClick={()=>{
 
             setCharacterPage({visible:false});
-
+            setCharacterDisplay({id:props.id, img:props.image});
+            
         }}>
             <div style={characterBG}>
           
-            </div>    
+            </div>   
+           { console.log(characterDisplay) }
         </div>
     )
 }

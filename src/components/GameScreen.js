@@ -1,11 +1,16 @@
 import React,{useContext} from 'react';
 import RoundOneCash from '../components/RoundOneCash';
 import RoundOneCashContext from '../context/RoundOneCashContext';
+import CharacterDisplayContext from '../context/CharacterDisplayContext';
 
 
-const GameDIsplay = () => {
+const GameScreen = () => {
     
-    const { roundOneCash} = useContext(RoundOneCashContext)
+    const {roundOneCash} = useContext(RoundOneCashContext);
+    const {characterDisplay} = useContext(CharacterDisplayContext);
+    const image = require(`../images/${characterDisplay.img}`).default;
+   
+
     return (
         <div className="gameDisplay">
             <div id="moneyDiv">
@@ -21,7 +26,7 @@ const GameDIsplay = () => {
 
             <div id="characterDisplay">
                 <div>
-                    <img src="./src/images/character_1.png" alt="" />
+                    <img src={image} alt="" />
                 </div>
             </div>
             <div id="gameScreen">
@@ -35,5 +40,4 @@ const GameDIsplay = () => {
      </div>
     )
 }
-
-export default GameDIsplay
+export default GameScreen
