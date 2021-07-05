@@ -3,6 +3,7 @@ import RoundOneCash from '../components/RoundOneCash';
 import RoundOneCashContext from '../context/RoundOneCashContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
 import ResultButtonContext from '../context/ResultButtonContext';
+import AnswerButtons from '../components/AnswerButtons';
 
 
 const GameScreen = () => {
@@ -21,6 +22,8 @@ const GameScreen = () => {
             return res.json();
         })
         .then((json)=>{
+
+            /*Created api for trivia question, set correct answer and wrong answer into one state (resultButton) */
             setCorrectAnswer(json.results[0].correct_answer)
             setWrongAnswer(json.results[0].incorrect_answers)
 
@@ -31,16 +34,12 @@ const GameScreen = () => {
             choices.push(answer);
             setResultButton(choices);
 
-            console.log(answer)
-            console.log(choices)
+         
         })
         .catch(err=>console.log(err))
     },[])
 
-    console.log(resultButton)
-    console.log(`correct:${correctAnswer}`)
-    console.log(`incorrect:${wrongAnswer}`)
-    console.log(`resultButton:${resultButton}`)
+ 
     return (
         <div className="gameDisplay">
             <div id="moneyDiv">
@@ -60,12 +59,19 @@ const GameScreen = () => {
                 </div>
             </div>
             <div id="gameScreen">
-                <div id="screen">
-
+                <div id="screen" className="grid col-1">
+                 kkkkkkkkkkkkkkkkkkkk
                 </div>
-                <div id="button-area" className="grid col-4">
-
-                </div>
+                <div id="button-area"  >
+                    
+                    <div  className="grid col-2">
+                         {
+                            resultButton.map((choices)=>(<AnswerButtons answers={choices}/>))
+                         }
+                    </div>
+                        
+                        
+                 </div>
             </div>
             <div id="actionBtn">
                 
