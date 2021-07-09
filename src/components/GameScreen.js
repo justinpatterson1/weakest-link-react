@@ -4,41 +4,42 @@ import RoundOneCashContext from '../context/RoundOneCashContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
 import ResultButtonContext from '../context/ResultButtonContext';
 import AnswerButtons from '../components/AnswerButtons';
+import CorrectAnswerContext from '../context/CorrectAnswerContext';
+import QuestionContext from '../context/QuestionContext';
 
 
 const GameScreen = () => {
     
+    const [time,setTime] = useState("");
+ 
+   
+    
+
     const {roundOneCash} = useContext(RoundOneCashContext);
     const {characterDisplay} = useContext(CharacterDisplayContext);
-    const [correctAnswer,setCorrectAnswer] = useState('');
-    const [wrongAnswer,setWrongAnswer] = useState([])
+    const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
+    const {question} = useContext(QuestionContext)
     const {resultButton,setResultButton} = useContext(ResultButtonContext)
     const image = require(`../images/${characterDisplay.img}`).default;
    
-    useEffect(()=>{
-        const ENDPOINT   = "https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple"
-        fetch(ENDPOINT)
-        .then((res)=>{
-            return res.json();
-        })
-        .then((json)=>{
 
-            /*Created api for trivia question, set correct answer and wrong answer into one state (resultButton) */
-            setCorrectAnswer(json.results[0].correct_answer)
-            setWrongAnswer(json.results[0].incorrect_answers)
+    const timer = (()=>
+    { 
+        let time = 10;
+        const interval = setInterval(()=>{
+            const timer = time--
+            setTime(timer)
 
-            const answer = correctAnswer;
+            if(time == 0)
+            {
+                clearInterval(time)
+            }
 
-            const choices = [...wrongAnswer];
-            
-            choices.push(answer);
-            setResultButton(choices);
+        },1000)
+    })
+    
 
-         
-        })
-        .catch(err=>console.log(err))
-    },[])
-
+    
  
     return (
         <div className="gameDisplay">
@@ -60,7 +61,7 @@ const GameScreen = () => {
             </div>
             <div id="gameScreen">
                 <div id="screen" className="grid col-1">
-                 kkkkkkkkkkkkkkkkkkkk
+                    {question}
                 </div>
                 <div id="button-area"  >
                     
@@ -74,7 +75,7 @@ const GameScreen = () => {
                  </div>
             </div>
             <div id="actionBtn">
-                
+                {time}
             </div>
      </div>
     )
