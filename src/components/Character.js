@@ -2,10 +2,11 @@ import React,{useContext} from 'react';
 import CharacterPageContext from '../context/CharacterPageContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
 import GameDisplayContext from '../context/GameDisplayContext';
-
+import TimeContext from '../context/TimeContext';
 
 const Character = (props) => {
 
+    const {setTime} = useContext(TimeContext)
     const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
     const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
@@ -23,6 +24,21 @@ const Character = (props) => {
         width:'100%'
 
     }
+    const timer = (()=>
+    { 
+        let time = 0;
+        const interval = setInterval(()=>{
+            const timer = time++;
+            setTime(timer)
+
+            if(time == 0)
+            {
+                clearInterval(time)
+            }
+
+        },1000)
+    })
+
 
     return (
         <div className="character"  onClick={()=>{
@@ -30,7 +46,7 @@ const Character = (props) => {
             setCharacterPage({visible:false});
             setCharacterDisplay({id:props.id, img:props.image});
             setGameScreen({visible:true});
-            
+            timer()
         }}>
             <div style={characterBG}>
           

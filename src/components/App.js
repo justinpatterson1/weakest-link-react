@@ -12,9 +12,10 @@ import ResultButtonContext from "../context/ResultButtonContext";
 import CorrectAnswerContext from '../context/CorrectAnswerContext';
 import QuestionContext from '../context/QuestionContext';
 import HomeScreenContext from '../context/HomeScreeContext';
-
+import TimeContext from '../context/TimeContext';
 
 function App() {
+  const [time,setTime] = useState("");
   const [homeScreen,setHomeScreen] = useState({visible:true});
   const [gameScreen,setGameScreen] = useState({visible:false});
   const [resultButton,setResultButton] = useState([]);
@@ -145,10 +146,13 @@ useEffect(()=>{
                 <CorrectAnswerContext.Provider value={{correctAnswer,setCorrectAnswer}}>
                   <QuestionContext.Provider value={{question,setQuestion}}>
                     <GameDisplayContext.Provider value={{gameScreen,setGameScreen}}>
+                      <TimeContext.Provider value={{time,setTime}}>
+                        
                                     <HomePage/>
                                     <CharacterPage/>
                                     <GameScreen/>
 
+                      </TimeContext.Provider>
                     </GameDisplayContext.Provider>
                    </QuestionContext.Provider>
                 </CorrectAnswerContext.Provider>

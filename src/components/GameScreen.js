@@ -7,14 +7,15 @@ import AnswerButtons from '../components/AnswerButtons';
 import CorrectAnswerContext from '../context/CorrectAnswerContext';
 import QuestionContext from '../context/QuestionContext';
 import GameDisplayContext from '../context/GameDisplayContext';
+import TimeContext from '../context/TimeContext';
 
 
 const GameScreen = () => {
     
-    const [time,setTime] = useState("");
+  
  
    
-    
+    const {time} = useContext(TimeContext)
     const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {roundOneCash} = useContext(RoundOneCashContext);
     const {characterDisplay} = useContext(CharacterDisplayContext);
@@ -24,21 +25,7 @@ const GameScreen = () => {
     const image = require(`../images/${characterDisplay.img}`).default;
    
 
-    const timer = (()=>
-    { 
-        let time = 10;
-        const interval = setInterval(()=>{
-            const timer = time--
-            setTime(timer)
-
-            if(time == 0)
-            {
-                clearInterval(time)
-            }
-
-        },1000)
-    })
-
+   
 
 
     
