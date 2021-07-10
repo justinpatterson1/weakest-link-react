@@ -13,6 +13,7 @@ import CorrectAnswerContext from '../context/CorrectAnswerContext';
 import QuestionContext from '../context/QuestionContext';
 import HomeScreenContext from '../context/HomeScreeContext';
 import TimeContext from '../context/TimeContext';
+import IncorrectAnswerContext from '../context/IncorrectAnswerContext';
 
 function App() {
   const [time,setTime] = useState("");
@@ -147,11 +148,13 @@ useEffect(()=>{
                   <QuestionContext.Provider value={{question,setQuestion}}>
                     <GameDisplayContext.Provider value={{gameScreen,setGameScreen}}>
                       <TimeContext.Provider value={{time,setTime}}>
-                        
+                        <IncorrectAnswerContext.Provider value={{wrongAnswer,setWrongAnswer}}>
+                          
                                     <HomePage/>
                                     <CharacterPage/>
                                     <GameScreen/>
 
+                        </IncorrectAnswerContext.Provider>
                       </TimeContext.Provider>
                     </GameDisplayContext.Provider>
                    </QuestionContext.Provider>
