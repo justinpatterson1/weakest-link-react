@@ -7,11 +7,10 @@ const AnswerButtons = (props) => {
     return (
         <button className="choice" value={props.answers} onClick={()=>
         {
-            alert("yoowwwww");
-            /* if(correctAnswer === props.answers)
+            if(props.answers == correctAnswer)
             {
-                alert("yoowwwww");
-            }*/
+                alert("yoww")
+            }
         }}>
             {props.answers}
         </button>

@@ -1,10 +1,12 @@
 import React,{useContext} from 'react';
 import CharacterPageContext from '../context/CharacterPageContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
+import GameDisplayContext from '../context/GameDisplayContext';
 
 
 const Character = (props) => {
 
+    const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
     const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
     const image = require(`../images/${props.image}`).default
@@ -27,6 +29,7 @@ const Character = (props) => {
 
             setCharacterPage({visible:false});
             setCharacterDisplay({id:props.id, img:props.image});
+            setGameScreen({visible:true});
             
         }}>
             <div style={characterBG}>

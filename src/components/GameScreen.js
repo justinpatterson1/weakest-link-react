@@ -6,6 +6,7 @@ import ResultButtonContext from '../context/ResultButtonContext';
 import AnswerButtons from '../components/AnswerButtons';
 import CorrectAnswerContext from '../context/CorrectAnswerContext';
 import QuestionContext from '../context/QuestionContext';
+import GameDisplayContext from '../context/GameDisplayContext';
 
 
 const GameScreen = () => {
@@ -14,7 +15,7 @@ const GameScreen = () => {
  
    
     
-
+    const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {roundOneCash} = useContext(RoundOneCashContext);
     const {characterDisplay} = useContext(CharacterDisplayContext);
     const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
@@ -37,12 +38,14 @@ const GameScreen = () => {
 
         },1000)
     })
-    
+
+
 
     
  
     return (
-        <div className="gameDisplay">
+        <div className={gameScreen.visible === true?"":"hide"}>
+            <div className="gameDisplay">
             <div id="moneyDiv">
                 <div id="roundOneCashDiv">
                     <div  className="grid col-9">
@@ -77,6 +80,7 @@ const GameScreen = () => {
             <div id="actionBtn">
                 {time}
             </div>
+         </div>
      </div>
     )
 }
