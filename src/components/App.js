@@ -76,12 +76,44 @@ function App() {
 const [character,setCharacter] = useState([
   {
     id:1,
-    img:"character_1.png"
+    proPic:"img1_proPic.png",
+    img:"img1.png"
   },
 
   {
     id:2,
-    img:"batman.png"
+    proPic:"img2_proPic.png",
+    img:"img2.png"
+  },
+  {
+    id:3,
+    proPic:"img3_proPic.png",
+    img:"img3.png"
+  },
+  {
+    id:4,
+    proPic:"img4_proPic.png",
+    img:"img4.png"
+  },
+  {
+    id:5,
+    proPic:"img5_proPic.png",
+    img:"img5.png"
+  },
+  {
+    id:6,
+    proPic:"img6_proPic.png",
+    img:"img6.png"
+  },
+  {
+    id:7,
+    proPic:"img7_proPic.png",
+    img:"img7.png"
+  },
+  {
+    id:8,
+    proPic:"img8_proPic.png",
+    img:"img8.png"
   }
 
 ])

@@ -50,6 +50,11 @@
   grid-template-columns: repeat(9,1fr);
 }
 
+.col-10
+{
+  grid-template-columns: repeat(10,1fr);
+}
+
 
 #homePage
 {
@@ -140,8 +145,9 @@
 #actionBtn
 {
   grid-area:actionBtn;
-  
-}
+  justify-items: center;
+  height: 100%;
+ }
 
 .cash-div
 {
@@ -172,11 +178,35 @@
   align-items: center;
 }
 
-#button-area
+#time
+{
+
+  background-color: orangered;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  justify-items: center;
+  align-self: end;
+  text-align: center;
+  margin-bottom: 10px;
+color: white;
+}
+
+#time > div
+{
+  align-self: center;
+}
+
+#time-div
 {
   
-  
+  justify-items: center;
+  align-items: center;
 }
+
+  
+  
+
 
 #button-area > div
 {
@@ -197,4 +227,10 @@
 {
   background-color: orangered;
   color: white;
+}
+
+#bank:hover
+{
+  background-color: white;
+  color: orangered;
 }

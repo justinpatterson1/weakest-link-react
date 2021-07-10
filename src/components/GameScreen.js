@@ -8,7 +8,7 @@ import CorrectAnswerContext from '../context/CorrectAnswerContext';
 import QuestionContext from '../context/QuestionContext';
 import GameDisplayContext from '../context/GameDisplayContext';
 import TimeContext from '../context/TimeContext';
-
+import ActionButtons from '../components/ActionButtons'
 
 const GameScreen = () => {
     
@@ -35,11 +35,15 @@ const GameScreen = () => {
             <div className="gameDisplay">
             <div id="moneyDiv">
                 <div id="roundOneCashDiv">
-                    <div  className="grid col-9">
+                    <div  className="grid col-10">
                         {
                             roundOneCash.map((cash)=>(<RoundOneCash Key={cash.id} value={cash.value} selected={cash.selected}/>)) 
                         }
+                    <div className="roundCashBg cash-div grid col-1" id="bank">
+                        <h2 >BANK</h2>
                     </div>
+                    </div>
+                    
                 </div>
                 <div className="hide"></div>
             </div>
@@ -64,9 +68,7 @@ const GameScreen = () => {
                         
                  </div>
             </div>
-            <div id="actionBtn">
-                {time}
-            </div>
+            <ActionButtons/>
          </div>
      </div>
     )

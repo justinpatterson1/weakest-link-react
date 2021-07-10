@@ -10,7 +10,7 @@ const Character = (props) => {
     const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
     const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
-    const image = require(`../images/${props.image}`).default
+    const image = require(`../images/${props.proPic}`).default
 
     const characterBG=
     {
@@ -26,10 +26,28 @@ const Character = (props) => {
     }
     const timer = (()=>
     { 
+        let min= 0;
         let time = 0;
+        let sec = 0;
+        let hr = `${sec}${time}`
         const interval = setInterval(()=>{
-            const timer = time++;
-            setTime(timer)
+            let timer = `${min}:${sec}${time++}`;
+
+            setTime(timer) 
+            
+            
+            if(sec == 5 && time==9 )
+            { 
+                time=0;
+                sec=0;
+                 min++
+            
+            }
+            if(time==9)
+            {
+                 sec++;
+                 time=0;
+            }
 
             if(time == 0)
             {
