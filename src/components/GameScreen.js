@@ -37,7 +37,7 @@ const GameScreen = () => {
                 <div id="roundOneCashDiv">
                     <div  className="grid col-9">
                         {
-                            roundOneCash.map((cash)=>(<RoundOneCash Key={cash.id} value={cash.value} />)) 
+                            roundOneCash.map((cash)=>(<RoundOneCash Key={cash.id} value={cash.value} selected={cash.selected}/>)) 
                         }
                     </div>
                 </div>
