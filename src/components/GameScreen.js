@@ -1,4 +1,4 @@
-import React,{useContext,useEffect,useState} from 'react';
+import React,{useContext} from 'react';
 import RoundOneCash from '../components/RoundOneCash';
 import RoundOneCashContext from '../context/RoundOneCashContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
@@ -9,24 +9,120 @@ import QuestionContext from '../context/QuestionContext';
 import GameDisplayContext from '../context/GameDisplayContext';
 import TimeContext from '../context/TimeContext';
 import ActionButtons from '../components/ActionButtons'
+import RoundTwoCash from '../components/RoundTwoCash';
+import RoundTwoCashContext from '../context/RoundTwoCashContext';
+import RoundContext from '../context/RoundContext';
+import BankContext from '../context/BankContext';
 
 const GameScreen = () => {
     
   
  
-   
-    const {time} = useContext(TimeContext)
+    const {bank,setBank}= useContext(BankContext)
+    const {round} = useContext(RoundContext)
+    const {time} = useContext(TimeContext);
+    const {roundTwoCash,setRoundTwoCash} = useContext(RoundTwoCashContext)
     const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
-    const {roundOneCash} = useContext(RoundOneCashContext);
+    const {roundOneCash,setRoundOneCash} = useContext(RoundOneCashContext);
     const {characterDisplay} = useContext(CharacterDisplayContext);
     const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
     const {question} = useContext(QuestionContext)
     const {resultButton,setResultButton} = useContext(ResultButtonContext)
     const image = require(`../images/${characterDisplay.img}`).default;
    
+const cashReset =()=>
+{
+    if(round ===1){
+    const cash = [...roundOneCash];
 
-   
+    for(let i=0; i<cash.length;i++)
+    {
+        cash[i].selected = false
+    }
+    const resetCash = cash.find((cash)=>{return cash.id === 1});
 
+    resetCash.selected = true;
+
+    setRoundOneCash(cash);
+ }
+
+ if(round ===2){
+    const cash = [...roundTwoCash];
+
+    for(let i=0; i<cash.length;i++)
+    {
+        cash[i].selected = false
+    }
+    const resetCash = cash.find((cash)=>{return cash.id === 1});
+
+    resetCash.selected = true;
+
+    setRoundTwoCash(cash);
+ }
+}
+
+const bankSum =()=>
+{
+    let bankVal = bank;
+    if(round === 1)
+    {
+        const roundCash = [...roundOneCash];
+
+        const selectedCashDiv = roundCash.find((cash)=>{return cash.selected === true});
+        
+        let cashDivVal = selectedCashDiv.value;
+
+        bankVal = bankVal + cashDivVal;
+
+        setBank(bankVal)
+
+        alert(bank)
+        cashReset()
+    }
+
+    if(round === 2)
+    {
+        const roundCash = [...roundTwoCash];
+
+        const selectedCashDiv = roundCash.find((cash)=>{return cash.selected === true});
+        
+        let cashDivVal = selectedCashDiv.value;
+
+        bankVal = bankVal + cashDivVal;
+
+        setBank(bankVal)
+        cashReset();
+
+        alert(bank)
+    }
+}
+
+const cashPositionCheck =()=>
+{
+    if(round === 1)
+    {
+        const cash = [...roundOneCash]
+
+        const check = cash.find((cash)=>{return cash.value === 0});
+
+        if(check.selected === true)
+        {
+            return true
+        }
+    }
+
+    if(round === 2)
+    {
+        const cash = [...roundTwoCash]
+
+        const check = cash.find((cash)=>{return cash.value === 0});
+
+        if(check.selected === true)
+        {
+            return true
+        }
+    }
+}
 
     
  
@@ -34,18 +130,40 @@ const GameScreen = () => {
         <div className={gameScreen.visible === true?"":"hide"}>
             <div className="gameDisplay">
             <div id="moneyDiv">
-                <div id="roundOneCashDiv">
-                    <div  className="grid col-10">
+                <div id="roundOneCashDiv" >
+                    <div className={round === 1?"":"hide"} >
+                        <div className="grid col-10">
                         {
                             roundOneCash.map((cash)=>(<RoundOneCash Key={cash.id} value={cash.value} selected={cash.selected}/>)) 
                         }
-                    <div className="roundCashBg cash-div grid col-1" id="bank">
-                        <h2 >BANK</h2>
+
+                        <div className="roundCashBg cash-div grid col-1 bank-btn" onClick={(()=>{
+                            if(!cashPositionCheck())
+                            {
+                                bankSum()
+                            }
+                            
+                            
+                            })} >
+                            <h2 >BANK</h2>
+                        </div>
+                        </div>
+                   
                     </div>
+                    <div className={round === 2?"":"hide"} >
+                        <div className="grid col-7">
+                            {
+                                roundTwoCash.map((cash)=>(<RoundTwoCash Key={cash.id} value={cash.value} selected={cash.selected}/>))
+                            }
+                              <div className="roundCashBg cash-div grid col-1 bank-btn" >
+                                  <h2 >BANK</h2>
+                             </div>
+                        </div>
+                      
                     </div>
                     
                 </div>
-                <div className="hide"></div>
+                
             </div>
 
             <div id="characterDisplay">

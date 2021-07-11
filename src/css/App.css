@@ -44,6 +44,15 @@
 {
   grid-template-columns: repeat(6,1fr);
 }
+.col-7
+{
+  grid-template-columns: repeat(7,1fr);
+}
+
+.col-8
+{
+  grid-template-columns: repeat(8,1fr);
+}
 
 .col-9
 {
@@ -229,8 +238,13 @@ color: white;
   color: white;
 }
 
-#bank:hover
+.bank-btn:hover
 {
   background-color: white;
   color: orangered;
+}
+
+#bank
+{
+  text-align: center;
 }

@@ -14,8 +14,13 @@ import QuestionContext from '../context/QuestionContext';
 import HomeScreenContext from '../context/HomeScreeContext';
 import TimeContext from '../context/TimeContext';
 import IncorrectAnswerContext from '../context/IncorrectAnswerContext';
+import RoundTwoCashContext from '../context/RoundTwoCashContext';
+import BankContext from '../context/BankContext';
+import RoundContext from '../context/RoundContext'
 
 function App() {
+  const [round,setRound] = useState(1);
+  const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [homeScreen,setHomeScreen] = useState({visible:true});
   const [gameScreen,setGameScreen] = useState({visible:false});
@@ -58,7 +63,7 @@ function App() {
   },
   {
     id:7,
-    value:1250000,
+    value:125000,
     selected:false
   },
   {
@@ -72,6 +77,39 @@ function App() {
     selected:false
   }
  
+])
+
+const [roundTwoCash,setRoundTwoCash] = useState([
+  {
+    id:1,
+    value:0,
+    selected:true
+  },
+  {
+    id:2,
+    value:1000,
+    selected:false
+  },
+  {
+    id:3,
+    value:10000,
+    selected:false
+  },
+  {
+    id:4,
+    value:75000,
+    selected:false
+  },
+  {
+    id:5,
+    value:125000,
+    selected:false
+  },
+  {
+    id:6,
+    value:500000,
+    selected:false
+  }
 ])
 const [character,setCharacter] = useState([
   {
@@ -181,11 +219,17 @@ useEffect(()=>{
                     <GameDisplayContext.Provider value={{gameScreen,setGameScreen}}>
                       <TimeContext.Provider value={{time,setTime}}>
                         <IncorrectAnswerContext.Provider value={{wrongAnswer,setWrongAnswer}}>
-                          
+                          <RoundTwoCashContext.Provider value={{roundTwoCash,setRoundTwoCash}}>
+                            <BankContext.Provider value={{bank,setBank}}>
+                              <RoundContext.Provider value={{round,setRound}}>
+
                                     <HomePage/>
                                     <CharacterPage/>
                                     <GameScreen/>
 
+                              </RoundContext.Provider>
+                            </BankContext.Provider>
+                          </RoundTwoCashContext.Provider>
                         </IncorrectAnswerContext.Provider>
                       </TimeContext.Provider>
                     </GameDisplayContext.Provider>
@@ -195,7 +239,7 @@ useEffect(()=>{
              </CharacterDisplayContext.Provider>
           </RoundOneCashContext.Provider>
         </CharacterContext.Provider>
-    </CharacterPageContext.Provider>
+      </CharacterPageContext.Provider>
     </HomeScreenContext.Provider>
   
    </>
