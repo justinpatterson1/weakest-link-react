@@ -3,9 +3,14 @@ import CharacterPageContext from '../context/CharacterPageContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
 import GameDisplayContext from '../context/GameDisplayContext';
 import TimeContext from '../context/TimeContext';
+import RoundContext from '../context/RoundContext';
+import TimeTwoContext from '../context/TimeTwoContext';
+import {timer,timeCheck} from '../utils/time'
 
 const Character = (props) => {
 
+    const {round,setRound} = useContext(RoundContext)
+    const {time2,setTime2} = useContext(TimeTwoContext)
     const {setTime} = useContext(TimeContext)
     const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
@@ -24,39 +29,7 @@ const Character = (props) => {
         width:'100%'
 
     }
-    const timer = (()=>
-    { 
-        let min= 0;
-        let time = 0;
-        let sec = 0;
-        let hr = `${sec}${time}`
-        const interval = setInterval(()=>{
-            let timer = `${min}:${sec}${time++}`;
-
-            setTime(timer) 
-            
-            
-            if(sec == 5 && time==9 )
-            { 
-                time=0;
-                sec=0;
-                 min++
-            
-            }
-            if(time==9)
-            {
-                 sec++;
-                 time=0;
-            }
-
-            if(time == 0)
-            {
-                clearInterval(time)
-            }
-
-        },1000)
-    })
-
+    
 
     return (
         <div className="character"  onClick={()=>{
@@ -64,12 +37,12 @@ const Character = (props) => {
             setCharacterPage({visible:false});
             setCharacterDisplay({id:props.id, img:props.image});
             setGameScreen({visible:true});
-            timer()
+            timeCheck(setTime,round,setRound,setTime2)
         }}>
             <div style={characterBG}>
           
             </div>   
-           { console.log(characterDisplay) }
+             {console.log(characterDisplay)}
         </div>
     )
 }

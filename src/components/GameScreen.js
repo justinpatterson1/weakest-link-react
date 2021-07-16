@@ -13,6 +13,7 @@ import RoundTwoCash from '../components/RoundTwoCash';
 import RoundTwoCashContext from '../context/RoundTwoCashContext';
 import RoundContext from '../context/RoundContext';
 import BankContext from '../context/BankContext';
+import {timerTwo} from '../utils/time'
 
 const GameScreen = () => {
     
@@ -29,6 +30,8 @@ const GameScreen = () => {
     const {question} = useContext(QuestionContext)
     const {resultButton,setResultButton} = useContext(ResultButtonContext)
     const image = require(`../images/${characterDisplay.img}`).default;
+
+  
    
 const cashReset =()=>
 {
@@ -56,7 +59,7 @@ const cashReset =()=>
     const resetCash = cash.find((cash)=>{return cash.id === 1});
 
     resetCash.selected = true;
-
+   
     setRoundTwoCash(cash);
  }
 }
@@ -90,6 +93,7 @@ const bankSum =()=>
 
         bankVal = bankVal + cashDivVal;
 
+        
         setBank(bankVal)
         cashReset();
 
@@ -124,6 +128,7 @@ const cashPositionCheck =()=>
     }
 }
 
+
     
  
     return (
@@ -138,10 +143,7 @@ const cashPositionCheck =()=>
                         }
 
                         <div className="roundCashBg cash-div grid col-1 bank-btn" onClick={(()=>{
-                            if(!cashPositionCheck())
-                            {
-                                bankSum()
-                            }
+                            
                             
                             
                             })} >
@@ -154,8 +156,14 @@ const cashPositionCheck =()=>
                         <div className="grid col-7">
                             {
                                 roundTwoCash.map((cash)=>(<RoundTwoCash Key={cash.id} value={cash.value} selected={cash.selected}/>))
+                                
                             }
-                              <div className="roundCashBg cash-div grid col-1 bank-btn" >
+                              <div className="roundCashBg cash-div grid col-1 bank-btn" onClick={()=>{
+                                  if(!cashPositionCheck())
+                                  {
+                                      bankSum()
+                                  }
+                              }} >
                                   <h2 >BANK</h2>
                              </div>
                         </div>

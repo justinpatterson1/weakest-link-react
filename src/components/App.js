@@ -17,11 +17,13 @@ import IncorrectAnswerContext from '../context/IncorrectAnswerContext';
 import RoundTwoCashContext from '../context/RoundTwoCashContext';
 import BankContext from '../context/BankContext';
 import RoundContext from '../context/RoundContext'
+import TimeTwoContext from '../context/TimeTwoContext';
 
 function App() {
   const [round,setRound] = useState(1);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
+  const [time2,setTime2] = useState("");
   const [homeScreen,setHomeScreen] = useState({visible:true});
   const [gameScreen,setGameScreen] = useState({visible:false});
   const [resultButton,setResultButton] = useState([]);
@@ -222,11 +224,15 @@ useEffect(()=>{
                           <RoundTwoCashContext.Provider value={{roundTwoCash,setRoundTwoCash}}>
                             <BankContext.Provider value={{bank,setBank}}>
                               <RoundContext.Provider value={{round,setRound}}>
+                                <TimeTwoContext.Provider value={{time2,setTime2}}>
 
+                                  
                                     <HomePage/>
                                     <CharacterPage/>
                                     <GameScreen/>
 
+
+                                </TimeTwoContext.Provider>
                               </RoundContext.Provider>
                             </BankContext.Provider>
                           </RoundTwoCashContext.Provider>

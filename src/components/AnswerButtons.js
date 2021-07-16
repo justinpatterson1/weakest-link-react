@@ -4,18 +4,22 @@ import RoundOneCashContext from '../context/RoundOneCashContext'
 import QuestionContext from '../context/QuestionContext'
 import ResultButtonContext from '../context/ResultButtonContext'
 import IncorrectAnswerContext from '../context/IncorrectAnswerContext'
+import RoundContext from '../context/RoundContext'
+import RoundTwoCashContext from '../context/RoundTwoCashContext'
 
 const AnswerButtons = (props) => {
 
+    const{round} = useContext(RoundContext)
     const{setWrongAnswer} = useContext(IncorrectAnswerContext)
     const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
     const {setQuestion} = useContext(QuestionContext)
     const {setResultButton} = useContext(ResultButtonContext)
     const {roundOneCash,setRoundOneCash}= useContext(RoundOneCashContext);
-    
+    const {roundTwoCash,setRoundTwoCash}= useContext(RoundTwoCashContext);
 
     const colorChanger =()=>
     {
+        if(round===1){
         const cash = [...roundOneCash];
 
       const selectedCash = cash.find((cash)=>{return cash.selected === true})
@@ -32,13 +36,34 @@ const AnswerButtons = (props) => {
        newSelectedCash.selected = true;
 
        setRoundOneCash(cash);
+    }
+    
+    if(round===2){
+        const cash = [...roundTwoCash];
 
+      const selectedCash = cash.find((cash)=>{return cash.selected === true})
+
+      for(let i=0; i<cash.length;i++)
+      {
+          cash[i].selected = false
+      }
+     
+       let newSelectedCash =  selectedCash.id + 1;
+
+       newSelectedCash = cash.find((cash)=>{return cash.id === newSelectedCash});
+
+       newSelectedCash.selected = true;
+
+       setRoundTwoCash(cash);
+    }
+    
     
     }
 
     
     const wrongInput =()=>
     {
+        if(round===1){
         const cash = [...roundOneCash];
 
         for(let i=0; i<cash.length;i++)
@@ -50,10 +75,25 @@ const AnswerButtons = (props) => {
         resetCash.selected = true;
 
         setRoundOneCash(cash);
+    }
+
+    if(round===2){
+        const cash = [...roundTwoCash];
+
+        for(let i=0; i<cash.length;i++)
+        {
+            cash[i].selected = false
+        }
+        const resetCash = cash.find((cash)=>{return cash.id === 1});
+
+        resetCash.selected = true;
+
+        setRoundTwoCash(cash);
+    }
 
     }
 
-    const buttonPopulate = (corr,wrong)=>
+const buttonPopulate = (corr,wrong)=>
 {
   const rand = Math.floor((Math.random()*4));
   
