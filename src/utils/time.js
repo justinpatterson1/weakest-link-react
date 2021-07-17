@@ -25,7 +25,7 @@ const timer = ((setTime,round,setRound,setTime2)=>
                      time=0;
                 }
 
-                if(min >= 1)
+                if(min == 2 || round == 2)
                 {
                     clearInterval(time)
                     setRound(2)
@@ -95,6 +95,9 @@ const timeCheck = (setTime,round,setRound,setTime2)=>
         timer(setTime,round,setRound,setTime2)
     }
 
-   
+    if(round ===2)
+    {
+        timerTwo(round,setRound,setTime2)
+    }
 }
     export {timer,timerTwo,timeCheck};

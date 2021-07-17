@@ -13,15 +13,17 @@ import RoundTwoCash from '../components/RoundTwoCash';
 import RoundTwoCashContext from '../context/RoundTwoCashContext';
 import RoundContext from '../context/RoundContext';
 import BankContext from '../context/BankContext';
-import {timerTwo} from '../utils/time'
+import TimeTwoContext from '../context/TimeTwoContext';
+import {timeCheck, timerTwo} from '../utils/time'
 
 const GameScreen = () => {
     
   
  
     const {bank,setBank}= useContext(BankContext)
-    const {round} = useContext(RoundContext)
-    const {time} = useContext(TimeContext);
+    const {round,setRound} = useContext(RoundContext)
+    const {time2,setTime2} = useContext(TimeTwoContext);
+    const {time,setTime} = useContext(TimeContext);
     const {roundTwoCash,setRoundTwoCash} = useContext(RoundTwoCashContext)
     const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {roundOneCash,setRoundOneCash} = useContext(RoundOneCashContext);
@@ -79,8 +81,13 @@ const bankSum =()=>
 
         setBank(bankVal)
 
-        alert(bank)
+    
         cashReset()
+        if(bankVal >= 500000)
+        {
+            setRound(2)
+            timerTwo(setTime2,setRound);
+        }
     }
 
     if(round === 2)
@@ -96,8 +103,13 @@ const bankSum =()=>
         
         setBank(bankVal)
         cashReset();
+        if(bankVal >= 1000000)
+        {
+            setRound(3)
+            //timerTwo(setTime2,setRound);
+        }
 
-        alert(bank)
+
     }
 }
 
@@ -144,7 +156,10 @@ const cashPositionCheck =()=>
 
                         <div className="roundCashBg cash-div grid col-1 bank-btn" onClick={(()=>{
                             
-                            
+                            if(!cashPositionCheck())
+                            {
+                                bankSum()
+                            }
                             
                             })} >
                             <h2 >BANK</h2>
@@ -187,7 +202,7 @@ const cashPositionCheck =()=>
                     
                     <div  className="grid col-2">
                          {
-                            resultButton.map((choices)=>(<AnswerButtons answers={choices}/>))
+                            resultButton.map((choices,i)=>(<AnswerButtons id={i} answers={choices}/>))
                          }
                     </div>
                         

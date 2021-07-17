@@ -143,8 +143,10 @@ const apiFetch = ()=>
 
 
     return (
+        <div>
         <button className="choice" value={props.answers} onClick={()=>
         {
+            alert(props.id)
             if(props.answers == correctAnswer)
             {
                 colorChanger();
@@ -160,6 +162,7 @@ const apiFetch = ()=>
         }}>
             {props.answers}
         </button>
+        </div>
     )
 }
 

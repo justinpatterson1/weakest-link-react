@@ -248,3 +248,21 @@ color: white;
 {
   text-align: center;
 }
+
+#lifeLines > div
+{
+  justify-items: center;
+  height: 100%;
+}
+
+#pause-menu
+{
+  align-items: end;
+}
+
+.fiftyFifty:hover,
+.phone:hover,
+.audience:hover
+{
+  color: white;
+}

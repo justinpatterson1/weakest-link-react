@@ -20,7 +20,7 @@ import RoundContext from '../context/RoundContext'
 import TimeTwoContext from '../context/TimeTwoContext';
 
 function App() {
-  const [round,setRound] = useState(1);
+  const [round,setRound] = useState(3);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
