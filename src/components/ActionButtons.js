@@ -8,9 +8,11 @@ import TimeTwoContext from '../context/TimeTwoContext'
 import IncorrectAnswerContext from '../context/IncorrectAnswerContext'
 import CorrectAnswerContext from '../context/CorrectAnswerContext'
 import ResultButtonContext from '../context/ResultButtonContext'
+import AudienceContext from '../context/AudienceContext'
 const ActionButtons = () => {
 
-    const{setResultButton} = useContext(ResultButtonContext)
+    const {audience,setAudience} = useContext(AudienceContext)
+    const{resultButton,setResultButton} = useContext(ResultButtonContext)
     const{correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext)
     const{round} = useContext(RoundContext)
     const{time} = useContext(TimeContext)
@@ -31,7 +33,7 @@ const ActionButtons = () => {
         const rand = Math.floor((Math.random()*2)+1);
         
     
-        console.log(rand)
+        console.log(rand) 
         if(rand === 1)
         {
             ans.splice(1,0,correctAnswer)
@@ -43,6 +45,26 @@ const ActionButtons = () => {
             setResultButton(ans)
         }
     
+    }
+
+    const audienceChoice =()=>
+    {
+        let ans = wrongAnswer;
+        
+        for(let i=1; i<ans.length;i++)
+        {
+            ans.pop();
+        
+        }
+
+        const rand = Math.floor((Math.random()*3)+1);
+        
+    
+        console.log(rand) 
+        ans.splice(rand,0,correctAnswer)
+            setResultButton(ans)
+        
+        
     }
 
 
@@ -57,7 +79,7 @@ const ActionButtons = () => {
                 <div className="fiftyFifty" onClick={fiftyfifty}>
                     50/50
                 </div>
-                <div className="audience">
+                <div className="audience" onClick={audienceChoice}>
                     < FaQuestion/>
                 </div>
                 <div className="phone">

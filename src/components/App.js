@@ -18,8 +18,10 @@ import RoundTwoCashContext from '../context/RoundTwoCashContext';
 import BankContext from '../context/BankContext';
 import RoundContext from '../context/RoundContext'
 import TimeTwoContext from '../context/TimeTwoContext';
+import AudienceContext from '../context/AudienceContext';
 
 function App() {
+  const [audience,setAudience] = useState({id:0,selected:false});
   const [round,setRound] = useState(3);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
@@ -225,13 +227,13 @@ useEffect(()=>{
                             <BankContext.Provider value={{bank,setBank}}>
                               <RoundContext.Provider value={{round,setRound}}>
                                 <TimeTwoContext.Provider value={{time2,setTime2}}>
-
+                                  <AudienceContext.Provider value={{audience,setAudience}}>
                                   
                                     <HomePage/>
                                     <CharacterPage/>
                                     <GameScreen/>
 
-
+                                    </AudienceContext.Provider>
                                 </TimeTwoContext.Provider>
                               </RoundContext.Provider>
                             </BankContext.Provider>

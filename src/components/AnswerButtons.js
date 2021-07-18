@@ -6,9 +6,11 @@ import ResultButtonContext from '../context/ResultButtonContext'
 import IncorrectAnswerContext from '../context/IncorrectAnswerContext'
 import RoundContext from '../context/RoundContext'
 import RoundTwoCashContext from '../context/RoundTwoCashContext'
+import AudienceContext from '../context/AudienceContext'
 
 const AnswerButtons = (props) => {
 
+    const{audience} = useContext(AudienceContext)
     const{round} = useContext(RoundContext)
     const{setWrongAnswer} = useContext(IncorrectAnswerContext)
     const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
@@ -144,9 +146,9 @@ const apiFetch = ()=>
 
     return (
         <div>
-        <button className="choice" value={props.answers} onClick={()=>
+        <button className={ audience.selected==true?" hide choice":"choice"} value={props.answers} onClick={()=>
         {
-            alert(props.id)
+        
             if(props.answers == correctAnswer)
             {
                 colorChanger();
