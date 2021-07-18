@@ -68,6 +68,18 @@ const ActionButtons = () => {
     }
 
 
+    const callAFriend = ()=>
+    {
+        const rand = Math.floor((Math.random()*4))
+       const button =[...resultButton];
+
+       const randBtn = button.find((btn)=>{return btn.id === rand})
+      randBtn.selected = true;
+
+       setResultButton(button)
+    }
+
+
     return (
         <div id="actionBtn" className='grid col-1'>
         <div id="bank" >
@@ -82,7 +94,7 @@ const ActionButtons = () => {
                 <div className="audience" onClick={audienceChoice}>
                     < FaQuestion/>
                 </div>
-                <div className="phone">
+                <div className="phone" onClick={callAFriend}>
                     <ImPhone/>
                 </div>
             </div>

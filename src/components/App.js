@@ -19,16 +19,17 @@ import BankContext from '../context/BankContext';
 import RoundContext from '../context/RoundContext'
 import TimeTwoContext from '../context/TimeTwoContext';
 import AudienceContext from '../context/AudienceContext';
+import {valAssignment} from '../utils/ButtonUtils' 
 
 function App() {
-  const [audience,setAudience] = useState({id:0,selected:false});
+  const [audience,setAudience] = useState(null);
   const [round,setRound] = useState(3);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
   const [homeScreen,setHomeScreen] = useState({visible:true});
   const [gameScreen,setGameScreen] = useState({visible:false});
-  const [resultButton,setResultButton] = useState([]);
+  const [resultButton,setResultButton] = useState([{id:1,answer:"ans",selected:false},{id:2,answer:"ans",selected:false},{id:3,answer:"ans",selected:false},{id:4,answer:"ans",selected:false}]);
   const [correctAnswer,setCorrectAnswer] = useState('');
   const [question,setQuestion] = useState('');
   const [wrongAnswer,setWrongAnswer] = useState([])
@@ -160,27 +161,38 @@ const [character,setCharacter] = useState([
 
 ])
 
-const buttonPopulate = (corr,wrong)=>
+/*const buttonPopulate = (corr,wrong,resultButton,setResultButton)=>
 {
   const rand = Math.floor((Math.random()*4));
   
   const buttons = [...wrong];
-
+  const results = [...resultButton]
    buttons.splice(rand,0,corr)
-  setResultButton(buttons)
+   
+ for(let i=0; i < results.length ;i++)
+ {
+    results[i].answer = buttons[i];
+ }
 
+ setResultButton(results);
+
+ // setResultButton(buttons)
+
+ console.log("correct:"+ corr)
   console.log("rand:"+rand)
   console.log(buttons)
 }
 
-const valAssignment = (ques,corr,wrong)=>
+
+const valAssignment = (ques,corr,wrong,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)=>
 {
   setQuestion(ques);
   setCorrectAnswer(corr);
   setWrongAnswer(wrong)
 
-  buttonPopulate(corr,wrong)
-}
+  buttonPopulate(corr,wrong,resultButton,setResultButton)
+}*/
+
 
 console.log("question:" + question)
 console.log("wrong answers:" + wrongAnswer)
@@ -200,7 +212,7 @@ useEffect(()=>{
 
 
       
-     valAssignment(newQuestion,answer,incorrectAnswers)
+     valAssignment(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
      
 
 

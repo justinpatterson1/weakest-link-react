@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import CorrectAnswerContext from '../context/CorrectAnswerContext'
 import RoundOneCashContext from '../context/RoundOneCashContext'
 import QuestionContext from '../context/QuestionContext'
@@ -7,6 +7,7 @@ import IncorrectAnswerContext from '../context/IncorrectAnswerContext'
 import RoundContext from '../context/RoundContext'
 import RoundTwoCashContext from '../context/RoundTwoCashContext'
 import AudienceContext from '../context/AudienceContext'
+import { valAssignment } from '../utils/ButtonUtils'
 
 const AnswerButtons = (props) => {
 
@@ -15,7 +16,7 @@ const AnswerButtons = (props) => {
     const{setWrongAnswer} = useContext(IncorrectAnswerContext)
     const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
     const {setQuestion} = useContext(QuestionContext)
-    const {setResultButton} = useContext(ResultButtonContext)
+    const {resultButton,setResultButton} = useContext(ResultButtonContext)
     const {roundOneCash,setRoundOneCash}= useContext(RoundOneCashContext);
     const {roundTwoCash,setRoundTwoCash}= useContext(RoundTwoCashContext);
 
@@ -95,10 +96,32 @@ const AnswerButtons = (props) => {
 
     }
 
-const buttonPopulate = (corr,wrong)=>
+/*const buttonPopulate = (corr,wrong)=>
 {
-  const rand = Math.floor((Math.random()*4));
+    let i = 0;
+    let x=0;
+    const existedIndex = [];
+    
+    const buttons = [...wrong]
+    buttons.push(corr);
+    const newButtons=[];
+
+    setResultButton(buttons)
+
+    while(i < buttons.length)
+    {
+        const rand = Math.floor((Math.random()*4));
+        const obj = {id:1,answer:buttons[rand],selected:true}
+        newButtons.splice(rand,0,buttons[i]);
+        
+        setResultButton
+        i++
+    }
+
   
+    console.log("new buttons"+newButtons);
+    console.log("buttons:"+buttons);
+
   const buttons = [...wrong];
 
    buttons.splice(rand,0,corr)
@@ -106,15 +129,26 @@ const buttonPopulate = (corr,wrong)=>
 
   console.log("rand:"+rand)
   console.log(buttons)
-}
+}*/
 
-const valAssignment = (ques,corr,wrong)=>
+/*const valAssignment = (ques,corr,wrong)=>
 {
   setQuestion(ques);
   setCorrectAnswer(corr);
   setWrongAnswer(wrong)
 
   buttonPopulate(corr,wrong)
+}*/
+
+const buttonColorReset = ()=>
+{
+    const button = [...resultButton];
+
+    const resetBtn = button.find((btn)=>{return btn.selected === true});
+
+    resetBtn.selected = false;
+
+    setResultButton(button)
 }
 
 
@@ -134,7 +168,7 @@ const apiFetch = ()=>
 
 
                 
-                valAssignment(newQuestion,answer,incorrectAnswers)
+                valAssignment(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
                 
 
 
@@ -144,20 +178,22 @@ const apiFetch = ()=>
 
 
 
+
     return (
         <div>
-        <button className={ audience.selected==true?" hide choice":"choice"} value={props.answers} onClick={()=>
+        <button className={ props.selected === true ?"callAfriendPick choice":" choice"} value={props.answers} onClick={()=>
         {
         
             if(props.answers == correctAnswer)
             {
                 colorChanger();
                 apiFetch();
-                  
+                buttonColorReset()
             }
             else{
                 wrongInput();
                 apiFetch();
+                buttonColorReset()
             }
             
             
