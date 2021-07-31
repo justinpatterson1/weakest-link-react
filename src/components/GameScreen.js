@@ -18,12 +18,14 @@ import AudienceGraph from '../components/AudienceGraph';
 import GraphVisibilityContext from '../context/GraphVisibilityContext';
 import stageBackGround from '../images/stage-background.jpg'
 import RoundTextContext from '../context/RoundTextContext'
+import RoundPageContext from '../context/RoundPageContext'
 import {timeCheck, timerTwo} from '../utils/time'
 
 
 const GameScreen = () => {
     
     const {roundText,setRoundText} = useContext(RoundTextContext)
+    const {setRoundPageVisible} = useContext(RoundPageContext)
     const {graphVisibility} = useContext(GraphVisibilityContext)
     const {bank,setBank} = useContext(BankContext)
     const {round,setRound} = useContext(RoundContext)
@@ -101,9 +103,27 @@ const bankSum =()=>
         cashReset()
         if(bankVal >= 500000)
         {
-            setRound(2)
-            timerTwo(setTime2,setRound);
             setRoundText("Round 2")
+            setRoundPageVisible(true)
+            let roundTime = 0
+
+            const roundInterval = setInterval(()=>{
+             
+                let timer = roundTime++
+                
+                if(timer === 2)
+                {
+                    setRound(2)
+                    timerTwo(setTime2,setRound);
+                    setRoundPageVisible(false)
+
+                }
+
+            },1000)
+            
+            
+            
+           
         }
     }
 
@@ -122,8 +142,22 @@ const bankSum =()=>
         cashReset();
         if(bankVal >= 1000000)
         {
-            setRound(3)
             setRoundText("Round 3")
+            setRoundPageVisible(true)
+            let roundTime = 0
+
+            const roundInterval = setInterval(()=>{
+             
+                let timer = roundTime++
+                
+                if(timer === 2)
+                {
+                    setRound(3)
+                    setRoundPageVisible(false)
+                }
+
+            },1000)
+            
             //timerTwo(setTime2,setRound);
         }
 
