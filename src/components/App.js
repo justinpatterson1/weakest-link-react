@@ -19,11 +19,20 @@ import BankContext from '../context/BankContext';
 import RoundContext from '../context/RoundContext'
 import TimeTwoContext from '../context/TimeTwoContext';
 import AudienceContext from '../context/AudienceContext';
+import AudienceGraphContext from '../context/AudienceGraphContext';
+import GraphVisibliltyContext from '../context/GraphVisibilityContext'
+import ColorContext from '../context/ColorContext'
+import CallAFriendContext from '../context/CallAFriendContext';
+import RoundPage from '../components/RoundPage';
+import RoundPageContext from '../context/RoundPageContext';
+import RoundTextContext from '../context/RoundTextContext';
 import {valAssignment} from '../utils/ButtonUtils' 
+
+
 
 function App() {
   const [audience,setAudience] = useState(null);
-  const [round,setRound] = useState(3);
+  const [round,setRound] = useState(1);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
@@ -35,6 +44,12 @@ function App() {
   const [wrongAnswer,setWrongAnswer] = useState([])
   const [characterDisplay,setCharacterDisplay] = useState({id:0,img:'stickman.png'});
   const [characterPage,setCharacterPage] = useState({visible:false});
+  const [graphVisibility,setGraphVisibility] = useState({visibility:false});
+  const [graphData,setGraphData] = useState()
+  const [color,setColor] =  useState(false);
+  const [isClicked,setIsClicked] = useState(false);
+  const [roundPageVisible,setRoundPageVisible] = useState(false)
+  const [roundText,setRoundText] = useState('Round 1')
   const [roundOneCash,setRoundOneCash] = useState([
   {
     id:1,
@@ -161,6 +176,10 @@ const [character,setCharacter] = useState([
 
 ])
 
+
+
+
+
 /*const buttonPopulate = (corr,wrong,resultButton,setResultButton)=>
 {
   const rand = Math.floor((Math.random()*4));
@@ -240,11 +259,24 @@ useEffect(()=>{
                               <RoundContext.Provider value={{round,setRound}}>
                                 <TimeTwoContext.Provider value={{time2,setTime2}}>
                                   <AudienceContext.Provider value={{audience,setAudience}}>
-                                  
-                                    <HomePage/>
-                                    <CharacterPage/>
-                                    <GameScreen/>
+                                    <AudienceGraphContext.Provider value={{graphData,setGraphData}}>
+                                      <GraphVisibliltyContext.Provider value={{graphVisibility,setGraphVisibility}}>
+                                        <ColorContext.Provider value={{color,setColor}}>
+                                          <CallAFriendContext.Provider value={{isClicked,setIsClicked}}>
+                                            <RoundPageContext.Provider value={{roundPageVisible,setRoundPageVisible}}>
+                                              <RoundTextContext.Provider value={{roundText,setRoundText}}>
 
+                                                <HomePage/>
+                                                <CharacterPage/>
+                                                <RoundPage round={roundText} />
+                                                <GameScreen/>
+
+                                                </RoundTextContext.Provider>
+                                               </RoundPageContext.Provider>
+                                             </CallAFriendContext.Provider>
+                                          </ColorContext.Provider>
+                                        </GraphVisibliltyContext.Provider>
+                                     </AudienceGraphContext.Provider>
                                     </AudienceContext.Provider>
                                 </TimeTwoContext.Provider>
                               </RoundContext.Provider>

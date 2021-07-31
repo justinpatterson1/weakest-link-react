@@ -5,10 +5,14 @@ import GameDisplayContext from '../context/GameDisplayContext';
 import TimeContext from '../context/TimeContext';
 import RoundContext from '../context/RoundContext';
 import TimeTwoContext from '../context/TimeTwoContext';
+import RoundPageContext from '../context/RoundPageContext';
+import RoundTextContext from '../context/RoundTextContext';
 import {timer,timeCheck} from '../utils/time'
 
 const Character = (props) => {
 
+    const {roundText,setRoundText} = useContext(RoundTextContext)
+    const {roundPageVisible,setRoundPageVisible} = useContext(RoundPageContext);
     const {round,setRound} = useContext(RoundContext)
     const {time2,setTime2} = useContext(TimeTwoContext)
     const {setTime} = useContext(TimeContext)
@@ -30,14 +34,30 @@ const Character = (props) => {
 
     }
     
+    const displayRound = ()=>
+    {
+        let time = 0
+        const interval = setInterval(()=>{
+            let timer = time++
+
+            if(timer === 2)
+            {
+                
+                setCharacterDisplay({id:props.id, img:props.image});
+                setGameScreen({visible:true});
+                setRoundPageVisible(false);
+                timeCheck(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)
+            }
+        },1000)
+    }
 
     return (
         <div className="character"  onClick={()=>{
 
+            //setRoundText("Round 1")
             setCharacterPage({visible:false});
-            setCharacterDisplay({id:props.id, img:props.image});
-            setGameScreen({visible:true});
-            timeCheck(setTime,round,setRound,setTime2)
+            setRoundPageVisible(true);
+            displayRound();
         }}>
             <div style={characterBG}>
           

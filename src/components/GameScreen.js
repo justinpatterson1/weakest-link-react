@@ -14,13 +14,18 @@ import RoundTwoCashContext from '../context/RoundTwoCashContext';
 import RoundContext from '../context/RoundContext';
 import BankContext from '../context/BankContext';
 import TimeTwoContext from '../context/TimeTwoContext';
+import AudienceGraph from '../components/AudienceGraph';
+import GraphVisibilityContext from '../context/GraphVisibilityContext';
+import stageBackGround from '../images/stage-background.jpg'
+import RoundTextContext from '../context/RoundTextContext'
 import {timeCheck, timerTwo} from '../utils/time'
+
 
 const GameScreen = () => {
     
-  
- 
-    const {bank,setBank}= useContext(BankContext)
+    const {roundText,setRoundText} = useContext(RoundTextContext)
+    const {graphVisibility} = useContext(GraphVisibilityContext)
+    const {bank,setBank} = useContext(BankContext)
     const {round,setRound} = useContext(RoundContext)
     const {time2,setTime2} = useContext(TimeTwoContext);
     const {time,setTime} = useContext(TimeContext);
@@ -35,6 +40,17 @@ const GameScreen = () => {
 
   
    
+    const stageBackGroundBG=
+    {
+        backgroundImage:`url(${stageBackGround})`,
+        backgroundPosition:`center center`,
+        backgroundSize:`cover`,
+        backgroundRepeat:`no-repeat`,
+        backgroundAttachment:`local`,
+        height:`100vh`
+
+    }
+
 const cashReset =()=>
 {
     if(round ===1){
@@ -87,6 +103,7 @@ const bankSum =()=>
         {
             setRound(2)
             timerTwo(setTime2,setRound);
+            setRoundText("Round 2")
         }
     }
 
@@ -106,6 +123,7 @@ const bankSum =()=>
         if(bankVal >= 1000000)
         {
             setRound(3)
+            setRoundText("Round 3")
             //timerTwo(setTime2,setRound);
         }
 
@@ -144,7 +162,13 @@ const cashPositionCheck =()=>
     
  
     return (
-        <div className={gameScreen.visible === true?"":"hide"}>
+        
+        <div style={stageBackGroundBG} className={gameScreen.visible === true?"":"hide"}id="gamer">
+             <div id="audienceModalDiv" className={graphVisibility.visibility === false ?"hide ":""}>
+                 <AudienceGraph/>
+            </div>
+        <div  >
+           
             <div className="gameDisplay">
             <div id="moneyDiv">
                 <div id="roundOneCashDiv" >
@@ -211,6 +235,7 @@ const cashPositionCheck =()=>
             </div>
             <ActionButtons/>
          </div>
+     </div>
      </div>
     )
 }

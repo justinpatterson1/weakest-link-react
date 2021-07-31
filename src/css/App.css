@@ -116,7 +116,8 @@
     "characterDisplay gameScreen gameScreen actionBtn"
     "characterDisplay gameScreen gameScreen actionBtn";
     height: 100vh;
-    background-color: rgba(0,64,82,255);
+    /*background-color: rgba(0,64,82,255);*/
+    
 }
 
 #moneyDiv
@@ -148,6 +149,7 @@
 #gameScreen
 {
   grid-area:gameScreen ;
+  
   
 }
 
@@ -270,4 +272,69 @@ color: white;
 .callAfriendPick
 {
   background-color: orangered;
+}
+
+.hide{
+  display: none;
+}
+
+
+
+.graphModalBody
+{
+  background-color: rgba(128, 128, 128, 0.459);
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+}
+
+.graphModalContent
+{
+  background-color:white;
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  
+}
+
+#audienceModalDiv
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#gamer
+{
+  position: relative;
+}
+
+#pieChart
+{
+
+  align-items: center;
+  justify-items: center;
+}
+
+#roundPage
+{
+    
+    width: 100%;
+    height: 100%;
+    
+}
+
+.roundPosition
+{
+  justify-self: center;
+    align-self: center;
+    text-align: center;
+    align-items: center;
+    color: white;
+    font-size: 6rem;
+    width: 600px;
+    height: 400px;
+    
 }

@@ -7,6 +7,8 @@ import IncorrectAnswerContext from '../context/IncorrectAnswerContext'
 import RoundContext from '../context/RoundContext'
 import RoundTwoCashContext from '../context/RoundTwoCashContext'
 import AudienceContext from '../context/AudienceContext'
+import ColorContext from '../context/ColorContext'
+import CallAFriendContext from '../context/CallAFriendContext'
 import { valAssignment } from '../utils/ButtonUtils'
 
 const AnswerButtons = (props) => {
@@ -19,6 +21,8 @@ const AnswerButtons = (props) => {
     const {resultButton,setResultButton} = useContext(ResultButtonContext)
     const {roundOneCash,setRoundOneCash}= useContext(RoundOneCashContext);
     const {roundTwoCash,setRoundTwoCash}= useContext(RoundTwoCashContext);
+    const {isClicked,setIsClicked} = useContext(CallAFriendContext)
+    const {color} = useContext(ColorContext)
 
     const colorChanger =()=>
     {
@@ -181,19 +185,38 @@ const apiFetch = ()=>
 
     return (
         <div>
-        <button className={ props.selected === true ?"callAfriendPick choice":" choice"} value={props.answers} onClick={()=>
+        <button  className={ props.selected === true ?"callAfriendPick choice":" choice"} value={props.answers} onClick={()=>
         {
-        
+         
+            
             if(props.answers == correctAnswer)
             {
                 colorChanger();
                 apiFetch();
-                buttonColorReset()
+               
+                if(round ===3)
+                {
+                    if(isClicked === true)
+                    {
+                        buttonColorReset()
+                        setIsClicked(false)
+                    }
+                   
+                }
             }
             else{
                 wrongInput();
                 apiFetch();
-                buttonColorReset()
+                if(round ===3)
+                {
+                    if(isClicked === true)
+                    {
+                        buttonColorReset()
+                        setIsClicked(false)
+                        
+                    }
+                   
+                }
             }
             
             
@@ -203,5 +226,7 @@ const apiFetch = ()=>
         </div>
     )
 }
+
+
 
 export default AnswerButtons

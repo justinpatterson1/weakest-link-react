@@ -1,4 +1,4 @@
-const timer = ((setTime,round,setRound,setTime2)=>
+const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)=>
     { 
         let min= 0;
         let time = 0;
@@ -28,8 +28,26 @@ const timer = ((setTime,round,setRound,setTime2)=>
                 if(min == 2 || round == 2)
                 {
                     clearInterval(time)
+                    setRoundText("Round 2")
+                    setRoundPageVisible(true)
+
+                    let roundTime = 0
+                    const roundInterval = setInterval(()=>{
+                     
+                        let timer = roundTime++
+                        
+                        if(timer === 2)
+                        {
+                            setRound(2)
+                            
+                            setRoundPageVisible(false)
+                        }
+
+                    },1000)
+                    
                     setRound(2)
-                   timerTwo(setTime2,setRound)
+                   timerTwo(setTime2,setRound,setRoundPageVisible,setRoundText)
+                   
                   
                 }
     
@@ -55,7 +73,7 @@ const timer = ((setTime,round,setRound,setTime2)=>
     })
 
 
-    const timerTwo =(setTime2,setRound)=>
+    const timerTwo =(setTime2,setRound,setRoundPageVisible,setRoundText)=>
     {
         let time = 0;
     
@@ -72,32 +90,46 @@ const timer = ((setTime,round,setRound,setTime2)=>
 
                 if(time === 90)
                 {   
-                    clearInterval(time)
+                    clearInterval(interval)
+                    setRoundText("Round 3")
+                    setRoundPageVisible(true)
+
+                    let roundTime = 0
+
+                    const roundInterval = setInterval(()=>{
+                     
+                        let timer = roundTime++
+                        
+                        if(timer === 2)
+                        {
+                            setRound(3)
+                            setRoundPageVisible(false)
+                        }
+
+                    },1000)
                     
-                    setRound(3)
-                    alert("kkk")
+                   
+                    
                 }
     
-                /*if(time == 0)
-                {
-                    
-                }*/
         
 
     },1000)
 }
 
 
-const timeCheck = (setTime,round,setRound,setTime2)=>
+const timeCheck = (setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)=>
 {
     if(round===1)
     {
-        timer(setTime,round,setRound,setTime2)
+        timer(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)
+        
     }
 
     if(round ===2)
     {
-        timerTwo(round,setRound,setTime2)
+        timerTwo(round,setRound,setTime2,setRoundPageVisible,setRoundText)
+    
     }
 }
     export {timer,timerTwo,timeCheck};
