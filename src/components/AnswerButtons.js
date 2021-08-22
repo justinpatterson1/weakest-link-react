@@ -9,12 +9,20 @@ import RoundTwoCashContext from '../context/RoundTwoCashContext'
 import AudienceContext from '../context/AudienceContext'
 import ColorContext from '../context/ColorContext'
 import CallAFriendContext from '../context/CallAFriendContext'
+import RoundTextContext from '../context/RoundTextContext'
+import RoundPageContext from '../context/RoundPageContext'
+import GameDisplayContext from '../context/GameDisplayContext'
+import HomeScreenContext from '../context/HomeScreeContext'
 import { valAssignment } from '../utils/ButtonUtils'
 
 const AnswerButtons = (props) => {
 
     const{audience} = useContext(AudienceContext)
-    const{round} = useContext(RoundContext)
+    const{setGameScreen} = useContext(GameDisplayContext)
+    const{setHomeScreen} = useContext(HomeScreenContext)
+    const{round,setRound} = useContext(RoundContext)
+    const{roundPageVisible,setRoundPageVisible} = useContext(RoundPageContext)
+    const{roundText,setRoundText} = useContext(RoundTextContext)
     const{setWrongAnswer} = useContext(IncorrectAnswerContext)
     const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
     const {setQuestion} = useContext(QuestionContext)
@@ -215,8 +223,29 @@ const apiFetch = ()=>
                         setIsClicked(false)
                         
                     }
+
+                    setGameScreen({visible:false});
+                    setRoundText("Game Over");
+                    setRoundPageVisible(true);
+                    setRound(1)
+
+                    let time = 0
+                    const interval = setInterval(()=>{
+                    let timer = time++
+
+                        if(timer===2)
+                        {
+                            clearInterval(interval)
+                            setRoundPageVisible(false)
+                            setHomeScreen(true)
+                        }
+                        
+                    },1000)
+
                    
                 }
+
+
             }
             
             

@@ -49,7 +49,7 @@ function App() {
   const [color,setColor] =  useState(false);
   const [isClicked,setIsClicked] = useState(false);
   const [roundPageVisible,setRoundPageVisible] = useState(false)
-  const [roundText,setRoundText] = useState('Round 1')
+  const [roundText,setRoundText] = useState()
   const [roundOneCash,setRoundOneCash] = useState([
   {
     id:1,

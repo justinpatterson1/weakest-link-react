@@ -7,12 +7,16 @@ import RoundContext from '../context/RoundContext';
 import TimeTwoContext from '../context/TimeTwoContext';
 import RoundPageContext from '../context/RoundPageContext';
 import RoundTextContext from '../context/RoundTextContext';
+import BankContext from '../context/BankContext';
+import HomeScreenContext from '../context/HomeScreeContext';
 import {timer,timeCheck} from '../utils/time'
 
 const Character = (props) => {
 
     const {roundText,setRoundText} = useContext(RoundTextContext)
+    const {setHomeScreen} = useContext(HomeScreenContext)
     const {roundPageVisible,setRoundPageVisible} = useContext(RoundPageContext);
+    const {bank} = useContext(BankContext)
     const {round,setRound} = useContext(RoundContext)
     const {time2,setTime2} = useContext(TimeTwoContext)
     const {setTime} = useContext(TimeContext)
@@ -34,8 +38,9 @@ const Character = (props) => {
 
     }
     
-    const displayRound = ()=>
+    const displayRound = (evt)=>
     {
+        let bankAmount = bank;
         let time = 0
         const interval = setInterval(()=>{
             let timer = time++
@@ -43,21 +48,24 @@ const Character = (props) => {
             if(timer === 2)
             {
                 
-                setCharacterDisplay({id:props.id, img:props.image});
+                setCharacterDisplay({id:evt.target.id, img:props.image});
                 setGameScreen({visible:true});
                 setRoundPageVisible(false);
-                timeCheck(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)
+                timeCheck(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)
+                
             }
         },1000)
     }
 
     return (
-        <div className="character"  onClick={()=>{
+        <div className="character"  onClick={(evt)=>{
 
             //setRoundText("Round 1")
             setCharacterPage({visible:false});
             setRoundPageVisible(true);
-            displayRound();
+            displayRound(evt);
+            setRoundText('Round One')
+            
         }}>
             <div style={characterBG}>
           

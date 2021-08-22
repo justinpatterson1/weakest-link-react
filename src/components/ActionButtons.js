@@ -133,25 +133,25 @@ const ActionButtons = () => {
 
     return (
         <div id="actionBtn" className='grid col-1'>
-        <div id="bank" >
+        <div style={{color:"white"}}  id="bank" >
            <span>BANK</span><br/>
            {bank}
         </div>
         <div id="lifeLines" className={round===3?"":"hide"}>
            <div className="grid col-1">
-                <div className={fiftyfiftyVisible.visible===true?"fiftyFifty":"hide"} onClick={()=>{
+                <div style={{color:"white"}} className={fiftyfiftyVisible.visible===true?"fiftyFifty":"hide"} onClick={()=>{
                     fiftyfifty()
                     setFiftyFiftyVisible(false)}}>
                     50/50
                 </div>
-                <div className={askAudienceVisible.visible === true?"audience":"hide"} onClick={()=>{
+                <div style={{color:"white"}} className={askAudienceVisible.visible === true?"audience":"hide"} onClick={()=>{
                     audienceChoice();
                     setAskAudienceVisible(false)
                     setGraphVisibility({visibility:true})
                 }}>
                     < FaQuestion/>
                 </div>
-                <div className={callAFriendVisible.visible===true?"phone":"hide"} onClick={()=>{
+                <div style={{color:"white"}} className={callAFriendVisible.visible===true?"phone":"hide"} onClick={()=>{
                     callAFriend();
                     setCallAFriendVisible(false)
                     setIsClicked(true)
@@ -160,7 +160,7 @@ const ActionButtons = () => {
                 </div>
             </div>
         </div>
-        <div id="pause-menu" className="grid col-1" >
+        <div style={{color:"white"}} id="pause-menu" className="grid col-1" >
             <div>
                 <FaPause/>
             </div>

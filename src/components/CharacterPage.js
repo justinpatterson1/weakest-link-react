@@ -14,7 +14,7 @@ const CharacterPage = () => {
         backgroundPosition:`center center`,
         backgroundSize:`cover`,
         backgroundRepeat:`no-repeat`,
-        backgroundAttachment:`local`,
+        backgroundAttachment:`fixed`,
         height:`100vh`
 
     }

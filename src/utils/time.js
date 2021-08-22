@@ -1,4 +1,4 @@
-const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)=>
+const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)=>
     { 
         let min= 0;
         let time = 0;
@@ -8,7 +8,7 @@ const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText
         const interval = setInterval(()=>{
             if(round === 1){
                 let timer = `${min}:${sec}${time++}`;
-
+               
                 setTime(timer) 
                 
                 
@@ -38,6 +38,7 @@ const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText
                         
                         if(timer === 2)
                         {
+                            clearInterval(roundInterval)
                             setRound(2)
                             
                             setRoundPageVisible(false)
@@ -46,21 +47,13 @@ const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText
                     },1000)
                     
                     setRound(2)
-                   timerTwo(setTime2,setRound,setRoundPageVisible,setRoundText)
+                   timerTwo(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)
                    
                   
                 }
     
-               /* if(min == 1)
-                {
-                    clearInterval(time)
-                }*/
-                if(round === 2)
-                {
-                
-                   
-                   
-                }
+            
+               
             }
 
            
@@ -73,7 +66,7 @@ const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText
     })
 
 
-    const timerTwo =(setTime2,setRound,setRoundPageVisible,setRoundText)=>
+    const timerTwo =(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)=>
     {
         let time = 0;
     
@@ -91,22 +84,65 @@ const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText
                 if(time === 90)
                 {   
                     clearInterval(interval)
-                    setRoundText("Round 3")
-                    setRoundPageVisible(true)
-
-                    let roundTime = 0
-
-                    const roundInterval = setInterval(()=>{
                      
-                        let timer = roundTime++
-                        
-                        if(timer === 2)
-                        {
-                            setRound(3)
-                            setRoundPageVisible(false)
-                        }
+                   /* setRoundText("Round 3")
+                    
+                    setRoundPageVisible(true)*/
+                    
+                    
+                
+                    
 
-                    },1000)
+                    if(bank == 0){
+                        
+                        setGameScreen({visible:false})
+                        setRoundText("Game Over")
+                        setRoundPageVisible(true)
+                        
+                        setRound(1)
+
+                        let roundTime = 0
+
+                        const roundInterval = setInterval(()=>{
+                         
+                            let timer = roundTime++
+                            
+                            if(timer === 2){
+                                
+                                clearInterval(roundInterval)
+
+                                setRoundPageVisible(false)
+                                setHomeScreen({visibile:true});
+                            }
+    
+                        },1000)
+                        
+                    }
+                    else{
+                        setRound(3)
+                        setRoundText("Round 3")
+                    
+                        setRoundPageVisible(true)
+                        let roundTime = 0
+
+                        const roundInterval = setInterval(()=>{
+                         
+                            let timer = roundTime++
+                            
+                            if(timer === 2)
+                            {
+                                
+                                clearInterval(roundInterval)
+                                
+                                //setRoundPageVisible(false)
+                                setRoundPageVisible(false)
+                            }
+    
+                        },1000)
+                        
+                    }
+
+                    
                     
                    
                     
@@ -118,18 +154,18 @@ const timer = ((setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText
 }
 
 
-const timeCheck = (setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)=>
+const timeCheck = (setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)=>
 {
     if(round===1)
     {
-        timer(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText)
+        timer(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)
         
     }
 
     if(round ===2)
     {
-        timerTwo(round,setRound,setTime2,setRoundPageVisible,setRoundText)
-    
+        timerTwo(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)
+        
     }
 }
     export {timer,timerTwo,timeCheck};
