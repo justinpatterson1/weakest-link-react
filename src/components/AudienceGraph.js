@@ -19,9 +19,14 @@ const AudienceGraph = () => {
             
                     <div id="pieChart" className="grid col-1" >
                     <VictoryPie
+                        style={{
+                            labels:{
+                                fontSize:15
+                            }
+                        }}
                         data={graphData}
                         colorScale={["blue", "yellow", "red","purple"]}
-                        radius={75}
+                        radius={100}
                         
                     />
                     </div>

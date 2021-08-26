@@ -225,7 +225,7 @@ const cashPositionCheck =()=>
                         </div>
                    
                     </div>
-                    <div className={round === 2?"":"hide"} >
+                    <div id="roundTwoCashDiv" className={round === 2?"":"hide"} >
                         <div className="grid col-7">
                             {
                                 roundTwoCash.map((cash)=>(<RoundTwoCash Key={cash.id} value={cash.value} selected={cash.selected}/>))

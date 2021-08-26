@@ -15,21 +15,24 @@ const RoundPage = (props) => {
         backgroundSize:`cover`,
         backgroundRepeat:`no-repeat`,
         backgroundAttachment:`local`,
-        height:`100vh`
+       
 
     }
 
   console.log(roundText)
 
     return (
-        <div className={roundPageVisible===false?"hide":""} style={roundScreenBG}>
-            <div className="grid col-1 " id="roundPage">
-                    <div className="roundPosition grid col-1 ">
-                        {props.round}
+           <div className={roundPageVisible===false?"hide":""}>
+                <div id="roundPageDiv"  >
+                    <div className="grid col-1 " id="roundPage" style={roundScreenBG}>
+                            <div className="roundPosition grid col-1 ">
+                                {props.round}
+                            </div>
                     </div>
+                    
+                </div>
             </div>
-            
-        </div>
+        
     )
 }
 

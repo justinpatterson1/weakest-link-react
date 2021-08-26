@@ -26,13 +26,14 @@ import CallAFriendContext from '../context/CallAFriendContext';
 import RoundPage from '../components/RoundPage';
 import RoundPageContext from '../context/RoundPageContext';
 import RoundTextContext from '../context/RoundTextContext';
+import PauseContext from '../context/PauseContext';
 import {valAssignment} from '../utils/ButtonUtils' 
 
 
 
 function App() {
   const [audience,setAudience] = useState(null);
-  const [round,setRound] = useState(1);
+  const [round,setRound] = useState(3);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
@@ -50,6 +51,7 @@ function App() {
   const [isClicked,setIsClicked] = useState(false);
   const [roundPageVisible,setRoundPageVisible] = useState(false)
   const [roundText,setRoundText] = useState()
+  const [pause,setPause] = useState(false);
   const [roundOneCash,setRoundOneCash] = useState([
   {
     id:1,
@@ -265,12 +267,14 @@ useEffect(()=>{
                                           <CallAFriendContext.Provider value={{isClicked,setIsClicked}}>
                                             <RoundPageContext.Provider value={{roundPageVisible,setRoundPageVisible}}>
                                               <RoundTextContext.Provider value={{roundText,setRoundText}}>
+                                                <PauseContext.Provider value={{pause,setPause}}>
 
                                                 <HomePage/>
                                                 <CharacterPage/>
                                                 <RoundPage round={roundText} />
                                                 <GameScreen/>
 
+                                                  </PauseContext.Provider>
                                                 </RoundTextContext.Provider>
                                                </RoundPageContext.Provider>
                                              </CallAFriendContext.Provider>

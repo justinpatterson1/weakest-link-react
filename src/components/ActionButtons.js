@@ -1,6 +1,7 @@
 import React,{useContext,useState} from 'react'
-import {FaQuestion,FaPause} from 'react-icons/fa'
+import {FaQuestion,FaPause,} from 'react-icons/fa'
 import {ImPhone} from 'react-icons/im'
+import {BsPlayFill} from 'react-icons/bs'
 import TimeContext from '../context/TimeContext'
 import BankContext from '../context/BankContext'
 import RoundContext from '../context/RoundContext'
@@ -13,6 +14,7 @@ import AudienceGraphContext from '../context/AudienceGraphContext'
 import GraphVisibilityContext from '../context/GraphVisibilityContext'
 import ColorContext from '../context/ColorContext'
 import CallAFriendContext from '../context/CallAFriendContext'
+import PauseContext from '../context/PauseContext'
 const ActionButtons = () => {
 
     const {setIsClicked} = useContext(CallAFriendContext)
@@ -26,6 +28,7 @@ const ActionButtons = () => {
     const{time} = useContext(TimeContext)
     const{time2} = useContext(TimeTwoContext)
     const {bank} = useContext(BankContext)
+    const {pause,setPause} = useContext(PauseContext)
     const {wrongAnswer,setWrongAnswer} = useContext(IncorrectAnswerContext)
     const[fiftyfiftyVisible,setFiftyFiftyVisible] = useState({visible:true})
     const[callAFriendVisible,setCallAFriendVisible] = useState({visible:true})
@@ -160,9 +163,12 @@ const ActionButtons = () => {
                 </div>
             </div>
         </div>
-        <div style={{color:"white"}} id="pause-menu" className="grid col-1" >
-            <div>
+        <div style={{color:"white"}} id="pause-menu " className="grid col-1" >
+            <div className={pause===false?"icon-size":"icon-size hide"} onClick={()=>{setPause(true)}}>
                 <FaPause/>
+            </div>
+            <div className={pause===false?"icon-size hide":"icon-size"}onClick={()=>{setPause(false)}}>
+                <BsPlayFill/>
             </div>
         </div>
        

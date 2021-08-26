@@ -13,18 +13,22 @@ const HomePage = () => {
         backgroundSize:`cover`,
         backgroundRepeat:`no-repeat`,
         backgroundAttachment:`local`,
-        height:`100vh`
+    
 
     }
 
 
     return (
        <div className={homeScreen.visible === false?"hide":""}>
-            <div id="homePage" className="grid col-1" style={imageStyle} onClick={()=>{
-                setHomeScreen({visible:false})
-                setCharacterPage({visible:true})
-                }}>
-                    <h1> click to start </h1>
+        <div id="homePageDiv" >
+                <div id="homePage"  className="grid col-1" style={imageStyle} onClick={()=>{
+                    
+                    setCharacterPage({visible:true})
+                    setHomeScreen({visible:false})
+
+                    }}>
+                        <h1> click to start </h1>
+                </div>
             </div>
         </div>
     )
