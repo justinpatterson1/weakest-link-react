@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext,useState} from 'react';
 import CharacterPageContext from '../context/CharacterPageContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
 import GameDisplayContext from '../context/GameDisplayContext';
@@ -9,6 +9,8 @@ import RoundPageContext from '../context/RoundPageContext';
 import RoundTextContext from '../context/RoundTextContext';
 import BankContext from '../context/BankContext';
 import HomeScreenContext from '../context/HomeScreeContext';
+import PauseContext from '../context/PauseContext';
+import StartTimerContext from '../context/StartTimerContext';
 import {timer,timeCheck} from '../utils/time'
 
 const Character = (props) => {
@@ -23,6 +25,9 @@ const Character = (props) => {
     const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
     const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
     const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
+    const {startTimer, setStartTimer} = useContext(StartTimerContext)
+    const [start ,setStart] = useState(true)
+    const {pause, setPause} = useContext(PauseContext)
     const image = require(`../images/${props.proPic}`).default
 
     const characterBG=
@@ -51,11 +56,14 @@ const Character = (props) => {
                 setCharacterDisplay({id:evt.target.id, img:props.image});
                 setGameScreen({visible:true});
                 setRoundPageVisible(false);
-                timeCheck(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen)
+                //timeCheck(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen,pause
                 
             }
         },1000)
     }
+
+ 
+
 
     return (
         <div className="character"  onClick={(evt)=>{
@@ -65,7 +73,10 @@ const Character = (props) => {
             setRoundPageVisible(true);
             displayRound(evt);
             setRoundText('Round One')
+            setStartTimer(true)
             
+
+               
         }}>
             <div style={characterBG}>
           

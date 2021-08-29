@@ -2,6 +2,7 @@ import React,{useContext,useState} from 'react'
 import {FaQuestion,FaPause,} from 'react-icons/fa'
 import {ImPhone} from 'react-icons/im'
 import {BsPlayFill} from 'react-icons/bs'
+import { timeCheck } from '../utils/time'
 import TimeContext from '../context/TimeContext'
 import BankContext from '../context/BankContext'
 import RoundContext from '../context/RoundContext'
@@ -15,6 +16,14 @@ import GraphVisibilityContext from '../context/GraphVisibilityContext'
 import ColorContext from '../context/ColorContext'
 import CallAFriendContext from '../context/CallAFriendContext'
 import PauseContext from '../context/PauseContext'
+import HomeScreenContext from '../context/HomeScreeContext'
+import RoundTextContext from '../context/RoundTextContext'
+import RoundPageContext from '../context/RoundPageContext'
+import GameDisplayContext from '../context/GameDisplayContext'
+import CharacterDisplayContext from '../context/CharacterDisplayContext'
+import CharacterPageContext from '../context/CharacterPageContext'
+import StartTimerContext from '../context/StartTimerContext'
+
 const ActionButtons = () => {
 
     const {setIsClicked} = useContext(CallAFriendContext)
@@ -24,11 +33,18 @@ const ActionButtons = () => {
     const{setGraphVisibility} = useContext(GraphVisibilityContext)
     const{resultButton,setResultButton} = useContext(ResultButtonContext)
     const{correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext)
-    const{round} = useContext(RoundContext)
-    const{time} = useContext(TimeContext)
-    const{time2} = useContext(TimeTwoContext)
+    const{round,setRound} = useContext(RoundContext)
+    const{time,setTime} = useContext(TimeContext)
+    const{time2,setTime2} = useContext(TimeTwoContext)
     const {bank} = useContext(BankContext)
     const {pause,setPause} = useContext(PauseContext)
+    const {roundText,setRoundText} = useContext(RoundTextContext)
+    const {setHomeScreen} = useContext(HomeScreenContext)
+    const {roundPageVisible,setRoundPageVisible} = useContext(RoundPageContext);
+    const {gameScreen,setGameScreen} = useContext(GameDisplayContext);
+    const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
+    const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
+    const {startTimer, setStartTimer} = useContext(StartTimerContext)
     const {wrongAnswer,setWrongAnswer} = useContext(IncorrectAnswerContext)
     const[fiftyfiftyVisible,setFiftyFiftyVisible] = useState({visible:true})
     const[callAFriendVisible,setCallAFriendVisible] = useState({visible:true})
@@ -164,13 +180,23 @@ const ActionButtons = () => {
             </div>
         </div>
         <div style={{color:"white"}} id="pause-menu " className="grid col-1" >
-            <div className={pause===false?"icon-size":"icon-size hide"} onClick={()=>{setPause(true)}}>
+            <div className={pause===false?"icon-size":"icon-size hide"} onClick={()=>{
+
+                setPause(true)
+                setStartTimer(false)
+
+                }}>
                 <FaPause/>
             </div>
-            <div className={pause===false?"icon-size hide":"icon-size"}onClick={()=>{setPause(false)}}>
+            <div className={pause===false?"icon-size hide":"icon-size"}onClick={()=>{
+                setPause(false)
+                setStartTimer(true)
+                
+                }}>
                 <BsPlayFill/>
             </div>
         </div>
+        
        
         <div id="time-div" className="grid col-1">
             <div id="time" className="grid col-1">

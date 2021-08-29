@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext,useEffect} from 'react';
 import RoundOneCash from '../components/RoundOneCash';
 import RoundOneCashContext from '../context/RoundOneCashContext';
 import CharacterDisplayContext from '../context/CharacterDisplayContext';
@@ -19,6 +19,9 @@ import GraphVisibilityContext from '../context/GraphVisibilityContext';
 import stageBackGround from '../images/stage-background.jpg'
 import RoundTextContext from '../context/RoundTextContext'
 import RoundPageContext from '../context/RoundPageContext'
+import StartTimerContext from '../context/StartTimerContext';
+import HomeScreenContext from '../context/HomeScreeContext';
+import PauseContext from '../context/PauseContext';
 import {timeCheck, timerTwo} from '../utils/time'
 
 
@@ -38,6 +41,9 @@ const GameScreen = () => {
     const {correctAnswer,setCorrectAnswer} = useContext(CorrectAnswerContext);
     const {question} = useContext(QuestionContext)
     const {resultButton,setResultButton} = useContext(ResultButtonContext)
+    const {startTimer,setStartTimer} = useContext(StartTimerContext)
+    const {homeScreen, setHomeScreen} = useContext(HomeScreenContext)
+    const {pause,setPause} = useContext(PauseContext)
     const image = require(`../images/${characterDisplay.img}`).default;
 
   
@@ -193,7 +199,7 @@ const cashPositionCheck =()=>
 }
 
 
-    
+   
  
     return (
         

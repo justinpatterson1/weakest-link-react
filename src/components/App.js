@@ -27,13 +27,14 @@ import RoundPage from '../components/RoundPage';
 import RoundPageContext from '../context/RoundPageContext';
 import RoundTextContext from '../context/RoundTextContext';
 import PauseContext from '../context/PauseContext';
+import StartTimerContext from '../context/StartTimerContext'
 import {valAssignment} from '../utils/ButtonUtils' 
 
 
 
 function App() {
   const [audience,setAudience] = useState(null);
-  const [round,setRound] = useState(3);
+  const [round,setRound] = useState(2);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
@@ -52,6 +53,12 @@ function App() {
   const [roundPageVisible,setRoundPageVisible] = useState(false)
   const [roundText,setRoundText] = useState()
   const [pause,setPause] = useState(false);
+  const [startTimer,setStartTimer] = useState(false)
+  const [clock,setClock] = useState({
+    minute:0,
+    second:0,
+    second2:0
+  })
   const [roundOneCash,setRoundOneCash] = useState([
   {
     id:1,
@@ -182,37 +189,188 @@ const [character,setCharacter] = useState([
 
 
 
-/*const buttonPopulate = (corr,wrong,resultButton,setResultButton)=>
-{
-  const rand = Math.floor((Math.random()*4));
+useEffect(() => {
   
-  const buttons = [...wrong];
-  const results = [...resultButton]
-   buttons.splice(rand,0,corr)
+  let interval = null;
+  let timeValues = clock
+  let min= timeValues.minute;
+  let time = timeValues.second2;
+  let sec = timeValues.second;
+  let timer =0;
+
+  console.log("minute:"+timeValues.minute)
+  if(startTimer === true ){
+    
+      
+     
+          //timer 1
+          interval = setInterval(()=>{
+         
+          if(round === 1){
+              
+  
+               timer = `${min}:${sec}${time++}`;
+             
+              setTime(timer) 
+              setClock({
+                minute:min,
+                second:sec,
+                second2:time
+              })
+              
+              
+              
+              if(sec == 5 && time==9 )
+              { 
+                  time=0;
+                  sec=0;
+                   min++
+              
+              }
+              if(time==9)
+              {
+                   sec++;
+                   time=0;
+              }
+  
+              if(min == 2 || round == 2)
+              {
+                  min=0;
+                  time=0;
+                  sec=0;
+
+                  clearInterval(interval)
+                  setRoundText("Round 2")
+                  setRoundPageVisible(true)
+  
+                  let roundTime = 0
+                  const roundInterval = setInterval(()=>{
+                   
+                      let timer = roundTime++
+                      
+                      if(timer === 2)
+                      {
+                          clearInterval(roundInterval)
+                          setRound(2)
+                          
+                          setRoundPageVisible(false)
+                      }
+  
+                  },1000)
+                  
+                  setRound(2)
+                 //timerTwo(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen,pause)
+              // Time 2
+                           
+           }
+  
+          
+      }
+  
+  
+      },1000)
+     
+      if(round === 2){
+        interval = setInterval(()=>{
+                   
+         timer = `${min++}`;
+
+        setTime2(timer) 
+        setClock({
+          minute:min ,
+          second:sec,
+          second2:time
+        })
+        console.log("running")
+        
+        
+
+        if(min === 90)
+        {   
+            clearInterval(interval)
+            
+        /* setRoundText("Round 3")
+            
+            setRoundPageVisible(true)*/
+            
+
+            if(bank == 0){
+                
+                setGameScreen({visible:false})
+                setRoundText("Game Over")
+                setRoundPageVisible(true)
+                
+                setRound(1)
+
+                let roundTime = 0
+
+                const roundInterval = setInterval(()=>{
+                
+                    let timer = roundTime++
+                    
+                    if(timer === 2){
+                        
+                        clearInterval(roundInterval)
+
+                        setRoundPageVisible(false)
+                        setHomeScreen({visibile:true});
+                    }
+
+                },1000)
+                
+            }
+            else{
+                setRound(3)
+                setRoundText("Round 3")
+            
+                setRoundPageVisible(true)
+                let roundTime = 0
+
+                const roundInterval = setInterval(()=>{
+                
+                    let timer = roundTime++
+                    
+                    if(timer === 2)
+                    {
+                        
+                        clearInterval(roundInterval)
+                        
+                        //setRoundPageVisible(false)
+                        setRoundPageVisible(false)
+                    }
+
+                },1000)
+                
+            }
+
+            
+            
+        
+            
+         }
+
+       },1000)
+     }   
+          
+  
+}
+else{
+  
+  if(round === 1 || round === 2){
    
- for(let i=0; i < results.length ;i++)
- {
-    results[i].answer = buttons[i];
- }
 
- setResultButton(results);
+    clearInterval(interval)
 
- // setResultButton(buttons)
+    
+  }
 
- console.log("correct:"+ corr)
-  console.log("rand:"+rand)
-  console.log(buttons)
+  
 }
 
-
-const valAssignment = (ques,corr,wrong,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)=>
-{
-  setQuestion(ques);
-  setCorrectAnswer(corr);
-  setWrongAnswer(wrong)
-
-  buttonPopulate(corr,wrong,resultButton,setResultButton)
-}*/
+return()=>{
+  clearInterval(interval)
+}
+}, [startTimer,pause])
 
 
 console.log("question:" + question)
@@ -268,12 +426,14 @@ useEffect(()=>{
                                             <RoundPageContext.Provider value={{roundPageVisible,setRoundPageVisible}}>
                                               <RoundTextContext.Provider value={{roundText,setRoundText}}>
                                                 <PauseContext.Provider value={{pause,setPause}}>
+                                                  <StartTimerContext.Provider value={{startTimer,setStartTimer}}>
 
-                                                <HomePage/>
-                                                <CharacterPage/>
-                                                <RoundPage round={roundText} />
-                                                <GameScreen/>
-
+                                                        <HomePage/>
+                                                        <CharacterPage/>
+                                                        <RoundPage round={roundText} />
+                                                        <GameScreen/>
+                                                        
+                                                        </StartTimerContext.Provider>
                                                   </PauseContext.Provider>
                                                 </RoundTextContext.Provider>
                                                </RoundPageContext.Provider>
