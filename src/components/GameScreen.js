@@ -266,7 +266,7 @@ const cashPositionCheck =()=>
                     
                     <div  className="grid col-2">
                          {
-                            resultButton.map((choices,i)=>(<AnswerButtons id={choices.id} answers={choices.answer} selected={choices.selected}/>))
+                            resultButton.map((choices,i)=>(<AnswerButtons id={choices.id} answers={choices.answer} selected={choices.selected} disabled={choices.disabled}/>))
                          }
                     </div>
                         

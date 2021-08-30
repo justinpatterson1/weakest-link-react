@@ -362,6 +362,40 @@ color: white;
   width: 100vw;
 }
 
+#pauseScreen
+{
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+#pauseScreen > div
+{
+  width: 100%;
+  height: 100vh;
+  justify-items: center;
+  align-items: end;
+  
+}
+
+#pauseScreen > div > div
+{
+  margin-bottom: 50px;
+}
+
+#pauseScreen > div > div> p{
+  color: goldenrod;
+  font-size: 2rem;
+  padding: 10px;
+}
+
+#pauseScreen > div > div> p:hover
+{
+  color: white;
+}
 
 
 
@@ -406,6 +440,7 @@ color: white;
       "characterDisplay gameScreen gameScreen actionBtn"
       "characterDisplay gameScreen gameScreen actionBtn";
       height: 100vh;
+      position: relative;
       /*background-color: rgba(0,64,82,255);*/
       
   }

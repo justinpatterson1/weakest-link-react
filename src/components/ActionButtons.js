@@ -23,6 +23,8 @@ import GameDisplayContext from '../context/GameDisplayContext'
 import CharacterDisplayContext from '../context/CharacterDisplayContext'
 import CharacterPageContext from '../context/CharacterPageContext'
 import StartTimerContext from '../context/StartTimerContext'
+import PauseScreenContext from '../context/PauseScreenContext';
+    
 
 const ActionButtons = () => {
 
@@ -46,37 +48,74 @@ const ActionButtons = () => {
     const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
     const {startTimer, setStartTimer} = useContext(StartTimerContext)
     const {wrongAnswer,setWrongAnswer} = useContext(IncorrectAnswerContext)
+    const {PauseScreenVisible,setPauseScreenVisible} = useContext(PauseScreenContext);
     const[fiftyfiftyVisible,setFiftyFiftyVisible] = useState({visible:true})
     const[callAFriendVisible,setCallAFriendVisible] = useState({visible:true})
     const [askAudienceVisible,setAskAudienceVisible] = useState({visible:true})
 
     const fiftyfifty = ()=>
     {
-        let ans = [...wrongAnswer];
-        
+        const btnResults = [];
+        const ans = wrongAnswer;
+        const results = [...resultButton]
         for(let i=0; i<ans.length;i++)
         {
             ans.pop();
-        
+            console.log(ans)
         }
 
+        let btnResultsOne =  results.find((btn)=>{return btn.id === 1});
+        let btnResultsTwo =  results.find((btn)=>{return btn.id === 2});
+        let btnResultsThree =  results.find((btn)=>{return btn.id === 3 });
+        let btnResultsFour =  results.find((btn)=>{return btn.id === 4 });
+
+        btnResults.push(btnResultsOne)
+        btnResults.push(btnResultsTwo)
+        btnResults.push(btnResultsThree)
+        btnResults.push(btnResultsFour)
+
+        console.log(btnResults)
         const rand = Math.floor((Math.random()*2)+1);
         
+        console.log("???:"+ans)
     
         console.log(rand) 
-        if(rand === 1)
+        if(rand == 1)
         {
             ans.splice(1,0,correctAnswer)
+            for(let i=0; i <ans.length;i++){
+
+              btnResults[i].answer = ans[i]
+
+            btnResults[2].answer = " ";
+            btnResults[2].disabled = true;
+
+            btnResults[3].answer = " ";
+            btnResults[3].disabled = true;
             
-        
+            }
+            setResultButton(btnResults)
+
         }
         else{
             ans.splice(0,0,correctAnswer)
-            
+            for(let i=0; i <ans.length;i++){
+
+                btnResults[i].answer = ans[i]
+
+                btnResults[2].answer = " ";
+                btnResults[2].disabled = true;
+
+                btnResults[3].answer = " ";
+                btnResults[3].disabled = true;
+               
+               }
+            setResultButton(btnResults)
         }
+     
+        
     
-        console.log(ans)
-        setResultButton(ans)
+        
     }
 
     const audienceChoice =()=>
@@ -180,21 +219,22 @@ const ActionButtons = () => {
             </div>
         </div>
         <div style={{color:"white"}} id="pause-menu " className="grid col-1" >
-            <div className={pause===false?"icon-size":"icon-size hide"} onClick={()=>{
+            <div className="icon-size" onClick={()=>{
 
                 setPause(true)
                 setStartTimer(false)
+                setPauseScreenVisible({visibility:true})
 
                 }}>
                 <FaPause/>
             </div>
-            <div className={pause===false?"icon-size hide":"icon-size"}onClick={()=>{
+           { /*<div className={pause===false?"icon-size hide":"icon-size"}onClick={()=>{
                 setPause(false)
                 setStartTimer(true)
                 
                 }}>
                 <BsPlayFill/>
-            </div>
+            </div>*/}
         </div>
         
        

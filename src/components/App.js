@@ -28,19 +28,21 @@ import RoundPageContext from '../context/RoundPageContext';
 import RoundTextContext from '../context/RoundTextContext';
 import PauseContext from '../context/PauseContext';
 import StartTimerContext from '../context/StartTimerContext'
+import PauseScreenContext from '../context/PauseScreenContext'
 import {valAssignment} from '../utils/ButtonUtils' 
+import PauseScreen from '../components/PauseScreen';
 
 
 
 function App() {
   const [audience,setAudience] = useState(null);
-  const [round,setRound] = useState(2);
+  const [round,setRound] = useState(3);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
   const [homeScreen,setHomeScreen] = useState({visible:true});
   const [gameScreen,setGameScreen] = useState({visible:false});
-  const [resultButton,setResultButton] = useState([{id:1,answer:"ans",selected:false},{id:2,answer:"ans",selected:false},{id:3,answer:"ans",selected:false},{id:4,answer:"ans",selected:false}]);
+  const [resultButton,setResultButton] = useState([{id:1,answer:"ans",selected:false,disabled:false},{id:2,answer:"ans",selected:false,disabled:false},{id:3,answer:"ans",selected:false,disabled:false},{id:4,answer:"ans",selected:false,disabled:false}]);
   const [correctAnswer,setCorrectAnswer] = useState('');
   const [question,setQuestion] = useState('');
   const [wrongAnswer,setWrongAnswer] = useState([])
@@ -54,6 +56,7 @@ function App() {
   const [roundText,setRoundText] = useState()
   const [pause,setPause] = useState(false);
   const [startTimer,setStartTimer] = useState(false)
+  const [pauseScreenVisible,setPauseScreenVisible] = useState({visibility:false})
   const [clock,setClock] = useState({
     minute:0,
     second:0,
@@ -427,13 +430,15 @@ useEffect(()=>{
                                               <RoundTextContext.Provider value={{roundText,setRoundText}}>
                                                 <PauseContext.Provider value={{pause,setPause}}>
                                                   <StartTimerContext.Provider value={{startTimer,setStartTimer}}>
-
+                                                    <PauseScreenContext.Provider value={{pauseScreenVisible,setPauseScreenVisible}}>
                                                         <HomePage/>
                                                         <CharacterPage/>
                                                         <RoundPage round={roundText} />
                                                         <GameScreen/>
+                                                        <PauseScreen/>
                                                         
-                                                        </StartTimerContext.Provider>
+                                                     </PauseScreenContext.Provider>
+                                                    </StartTimerContext.Provider>
                                                   </PauseContext.Provider>
                                                 </RoundTextContext.Provider>
                                                </RoundPageContext.Provider>

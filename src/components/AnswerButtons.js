@@ -164,6 +164,7 @@ const buttonColorReset = ()=>
 }
 
 
+
 const apiFetch = ()=>
 {
     const ENDPOINT ="https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple";
@@ -188,22 +189,31 @@ const apiFetch = ()=>
             .catch(err=>console.log(err))
 }
 
+const buttonsEnabled = ()=>{
+    const buttons = [...resultButton];
 
+    for(let i=0;i<buttons.length;i++)
+    {
+        buttons[i].disabled = false
+    }
+}
 
 
     return (
         <div>
-        <button  id="answerButtons" className={ props.selected === true ?"callAfriendPick choice":" choice"} value={props.answers} onClick={()=>
+        <button disabled={props.disabled !== false} id="answerButtons" className={ props.selected === true ?"callAfriendPick choice":" choice"} value={props.answers} onClick={()=>
         {
          
             
             if(props.answers == correctAnswer)
             {
                 colorChanger();
+                
                 apiFetch();
                
                 if(round ===3)
                 {
+                    buttonsEnabled()
                     if(isClicked === true)
                     {
                         buttonColorReset()
@@ -213,10 +223,13 @@ const apiFetch = ()=>
                 }
             }
             else{
+
+                
                 wrongInput();
                 apiFetch();
                 if(round ===3)
                 {
+                    buttonsEnabled()
                     if(isClicked === true)
                     {
                         buttonColorReset()
