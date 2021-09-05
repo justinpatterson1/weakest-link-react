@@ -31,12 +31,17 @@ import StartTimerContext from '../context/StartTimerContext'
 import PauseScreenContext from '../context/PauseScreenContext'
 import {valAssignment} from '../utils/ButtonUtils' 
 import PauseScreen from '../components/PauseScreen';
+import WinCounterContext from '../context/WinCounterContext'
+import WinnerScreen from '../components/WinnerScreen';
+import WinScreenDisplayContext from '../context/WinScreenDisplayContext';
+import ClockContext from '../context/ClockContext'
+import {apiFetch} from '../utils/ApiUtil'
 
 
 
 function App() {
   const [audience,setAudience] = useState(null);
-  const [round,setRound] = useState(3);
+  const [round,setRound] = useState(1);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
@@ -56,6 +61,8 @@ function App() {
   const [roundText,setRoundText] = useState()
   const [pause,setPause] = useState(false);
   const [startTimer,setStartTimer] = useState(false)
+  const [winCounter,setWinCounter] = useState({counter:0})
+  const [winScreenDisplay,setWinScreenDisplay] = useState({visibility:false})
   const [pauseScreenVisible,setPauseScreenVisible] = useState({visibility:false})
   const [clock,setClock] = useState({
     minute:0,
@@ -202,14 +209,15 @@ useEffect(() => {
   let timer =0;
 
   console.log("minute:"+timeValues.minute)
+
+  if(round === 1){
   if(startTimer === true ){
-    
-      
-     
+
           //timer 1
+          
           interval = setInterval(()=>{
          
-          if(round === 1){
+         
               
   
                timer = `${min}:${sec}${time++}`;
@@ -257,124 +265,173 @@ useEffect(() => {
                           setRound(2)
                           
                           setRoundPageVisible(false)
+                          setStartTimer(false)
+                          interval = null;
                       }
-  
+                       setStartTimer(true)   
+                      
                   },1000)
                   
-                  setRound(2)
+                  
+                  
                  //timerTwo(setTime,round,setRound,setTime2,setRoundPageVisible,setRoundText,bank,setGameScreen,setHomeScreen,pause)
               // Time 2
                            
            }
   
           
-      }
+      
   
   
       },1000)
-     
-      if(round === 2){
-        interval = setInterval(()=>{
-                   
-         timer = `${min++}`;
 
-        setTime2(timer) 
-        setClock({
-          minute:min ,
-          second:sec,
-          second2:time
-        })
-        console.log("running")
+      
+    
+    }else{
+  
+    
+       
+    
+        clearInterval(interval)
+    
         
-        
-
-        if(min === 90)
-        {   
-            clearInterval(interval)
-            
-        /* setRoundText("Round 3")
-            
-            setRoundPageVisible(true)*/
-            
-
-            if(bank == 0){
-                
-                setGameScreen({visible:false})
-                setRoundText("Game Over")
-                setRoundPageVisible(true)
-                
-                setRound(1)
-
-                let roundTime = 0
-
-                const roundInterval = setInterval(()=>{
-                
-                    let timer = roundTime++
-                    
-                    if(timer === 2){
-                        
-                        clearInterval(roundInterval)
-
-                        setRoundPageVisible(false)
-                        setHomeScreen({visibile:true});
-                    }
-
-                },1000)
-                
-            }
-            else{
-                setRound(3)
-                setRoundText("Round 3")
-            
-                setRoundPageVisible(true)
-                let roundTime = 0
-
-                const roundInterval = setInterval(()=>{
-                
-                    let timer = roundTime++
-                    
-                    if(timer === 2)
-                    {
-                        
-                        clearInterval(roundInterval)
-                        
-                        //setRoundPageVisible(false)
-                        setRoundPageVisible(false)
-                    }
-
-                },1000)
-                
-            }
-
-            
-            
-        
-            
-         }
-
-       },1000)
-     }   
-          
+      
+    
+      
+    }
+    
+    return()=>{
+      clearInterval(interval)
+    }
   
 }
-else{
+     
   
-  if(round === 1 || round === 2){
+
+
+}, [startTimer,pause])
+
+
+//timer 2
+useEffect(() => {
+  let interval2 = null;
+  let timeValues = clock
+  let min= timeValues.minute;
+  let time = timeValues.second2;
+  let sec = timeValues.second;
+  let timer =0;
+
+  if(round === 2){
+    if(startTimer === true ){
+    interval2 = setInterval(()=>{
+               
+     timer = `${min++}`;
+
+    setTime2(timer) 
+    setClock({
+      minute:min ,
+      second:sec,
+      second2:time
+    })
+    console.log("running")
+    
+    
+
+    if(min === 90)
+    {   
+        clearInterval(interval2)
+        
+    /* setRoundText("Round 3")
+        
+        setRoundPageVisible(true)*/
+        
+
+        if(bank == 0){
+            
+            setGameScreen({visible:false})
+            setRoundText("Game Over")
+            setRoundPageVisible(true)
+            
+            setRound(1)
+
+            let roundTime = 0
+
+            const roundInterval = setInterval(()=>{
+            
+                let timer = roundTime++
+                
+                if(timer === 2){
+                    
+                    clearInterval(roundInterval)
+
+                    setRoundPageVisible(false)
+                    setHomeScreen({visibile:true});
+                   interval2 = null
+
+                    setClock({
+                      minute:0,
+                      second:0,
+                      second2:0
+                    })
+
+                    setStartTimer(false)
+                }
+
+                
+            },1000)
+            
+        }
+        else{
+            setRound(3)
+            setRoundText("Round 3")
+        
+            setRoundPageVisible(true)
+            let roundTime = 0
+
+            const roundInterval = setInterval(()=>{
+            
+                let timer = roundTime++
+                
+                if(timer === 2)
+                {
+                  
+                    clearInterval(roundInterval)
+                    
+                    //setRoundPageVisible(false)
+                    setRoundPageVisible(false)
+                    
+                }
+
+            },1000)
+            
+        }
+
+        
+        
+    
+        
+     }
+
+   },1000)
+ }   
+ else{
+
+
    
 
-    clearInterval(interval)
-
-    
-  }
+  clearInterval(interval2)
 
   
+
+
+
 }
 
 return()=>{
-  clearInterval(interval)
+clearInterval(interval2)
 }
+  }
 }, [startTimer,pause])
-
 
 console.log("question:" + question)
 console.log("wrong answers:" + wrongAnswer)
@@ -431,12 +488,20 @@ useEffect(()=>{
                                                 <PauseContext.Provider value={{pause,setPause}}>
                                                   <StartTimerContext.Provider value={{startTimer,setStartTimer}}>
                                                     <PauseScreenContext.Provider value={{pauseScreenVisible,setPauseScreenVisible}}>
-                                                        <HomePage/>
-                                                        <CharacterPage/>
-                                                        <RoundPage round={roundText} />
-                                                        <GameScreen/>
-                                                        <PauseScreen/>
-                                                        
+                                                        <WinCounterContext.Provider value={{winCounter,setWinCounter}}>
+                                                          <WinScreenDisplayContext.Provider value={{winScreenDisplay,setWinScreenDisplay}}>
+                                                               <ClockContext.Provider value={{clock,setClock}}>
+                                                                
+                                                                <HomePage/>
+                                                                <CharacterPage/>
+                                                                <RoundPage round={roundText} />
+                                                                <GameScreen/>
+                                                                <PauseScreen/>
+                                                                <WinnerScreen/>
+
+                                                                </ClockContext.Provider>
+                                                              </WinScreenDisplayContext.Provider>
+                                                        </WinCounterContext.Provider>
                                                      </PauseScreenContext.Provider>
                                                     </StartTimerContext.Provider>
                                                   </PauseContext.Provider>

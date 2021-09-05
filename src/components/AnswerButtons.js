@@ -13,10 +13,13 @@ import RoundTextContext from '../context/RoundTextContext'
 import RoundPageContext from '../context/RoundPageContext'
 import GameDisplayContext from '../context/GameDisplayContext'
 import HomeScreenContext from '../context/HomeScreeContext'
+import WinCounterContext from '../context/WinCounterContext'
+import WinScreenDisplayContext from '../context/WinScreenDisplayContext'
 import { valAssignment } from '../utils/ButtonUtils'
 
 const AnswerButtons = (props) => {
 
+    
     const{audience} = useContext(AudienceContext)
     const{setGameScreen} = useContext(GameDisplayContext)
     const{setHomeScreen} = useContext(HomeScreenContext)
@@ -30,6 +33,8 @@ const AnswerButtons = (props) => {
     const {roundOneCash,setRoundOneCash}= useContext(RoundOneCashContext);
     const {roundTwoCash,setRoundTwoCash}= useContext(RoundTwoCashContext);
     const {isClicked,setIsClicked} = useContext(CallAFriendContext)
+    const {winCounter,setWinCounter} = useContext(WinCounterContext)
+    const {winScreenDisplay,setWinScreenDisplay} = useContext(WinScreenDisplayContext)
     const {color} = useContext(ColorContext)
 
     const colorChanger =()=>
@@ -198,28 +203,51 @@ const buttonsEnabled = ()=>{
     }
 }
 
+const winCheck = ()=>
+{ 
+     let i = winCounter.counter;
+    let win = i + 1     
+    console.log(win)
+    
+    if(win === 5)
+    {
+        setWinScreenDisplay({visibility:true})
+        setGameScreen({visible:false});
+    }
+    else{
+        setWinCounter({counter:win})
+    }
+}
+
 
     return (
         <div>
         <button disabled={props.disabled !== false} id="answerButtons" className={ props.selected === true ?"callAfriendPick choice":" choice"} value={props.answers} onClick={()=>
         {
-         
+           
             
             if(props.answers == correctAnswer)
             {
+            
                 colorChanger();
-                
                 apiFetch();
                
                 if(round ===3)
                 {
+                    
+                  
+                    
+                    
+
                     buttonsEnabled()
                     if(isClicked === true)
                     {
                         buttonColorReset()
                         setIsClicked(false)
                     }
-                   
+
+                   winCheck();
+                    
                 }
             }
             else{
@@ -250,7 +278,8 @@ const buttonsEnabled = ()=>{
                         {
                             clearInterval(interval)
                             setRoundPageVisible(false)
-                            setHomeScreen(true)
+                            setWinScreenDisplay({visibility:true})
+                            //setHomeScreen(true)
                         }
                         
                     },1000)

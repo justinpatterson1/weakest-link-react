@@ -21,7 +21,9 @@ const CharacterPage = () => {
 
     return (
         <div className={characterPage.visible === true?"":"hide"} id="characterPage" style={selectionBG}>
-            <div id="characterDiv" className="grid col-4" >
+            <h1 style={{color:'white',textAlign:'center',padding:'15px'}}>Choose A Character</h1>
+            <div id="characterDiv" style={{height:'90%'}}className="grid col-4" >
+            
               {
                 character.map((char)=>(<Character Key={char.id} id={char.id} image={char.img} proPic={char.proPic} />))
               }

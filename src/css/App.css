@@ -397,18 +397,106 @@ color: white;
   color: white;
 }
 
+.winScreenBtn
+{
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: white;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-items: center;
+}
 
+.winScreenBtn:hover
+{
+  background-color: orangered;
+  color: white;
+}
 
  
 
  
+/*Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) { 
+  #moneyDiv > div > div:nth-child(1) > div
+  {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    justify-items: start;
+  }
 
- /*Large devices (desktops, less than 1200px)*/
-@media (max-width: 1199.98px) {  }
+   #moneyDiv
+   {
+    
+   }
 
-/*Medium devices (tablets, less than 992px)*/
-@media (max-width: 991.98px) { 
+   #characterDisplay > div> img
+   {
+     height: 600px;
+   }
+   
+   .gameDisplay
+  {
+     display: grid;
+      grid-template-columns: 220px 400px 250px 100px;
+      grid-template-rows:1fr 1fr 1fr 1fr ;
+      grid-template-areas: 
+      "moneyDiv moneyDiv moneyDiv moneyDiv "
+      "characterDisplay gameScreen gameScreen actionBtn"
+      "characterDisplay gameScreen gameScreen actionBtn"
+      "characterDisplay gameScreen gameScreen actionBtn";
+      height: 100vh;
+      position: relative;
+      /*background-color: rgba(0,64,82,255);*/
+      
+  }
   
+   #screen
+   {
+     width: 80%;
+     height: 400px;
+     margin: 0 auto;
+     font-size: 2rem;
+   }
+
+   .choice{
+    width: 420px;
+    height: 110px;
+     column-gap: 10px;
+     font-size: 2rem;
+     
+   }
+
+   
+#button-area > div
+{
+  height: 100%;
+  margin-top: 50px;
+  row-gap: 20px;
+  column-gap: 0px;
+  justify-items: center;
+}
+
+#button-area > div
+{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#time
+{
+  align-self: start;
+  font-size: 1.3rem;
+}
+
+#bank > span,
+#bank
+{
+  font-size: 40px;
+}
+
  }
 
 
@@ -442,6 +530,533 @@ color: white;
       height: 100vh;
       position: relative;
       /*background-color: rgba(0,64,82,255);*/
+      
+  }
+  
+  .cash-div
+  {
+    width: 60px;
+    height: 60px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    border:2px solid orangered;
+    border-radius:50px;
+    margin-top: 10px;
+  }
+  
+  #moneyDiv > div > div:nth-child(1) ,
+  #moneyDiv > div:nth-child(1) 
+  {
+    
+    width: 100%;
+  }
+  
+  #moneyDiv 
+  {
+    
+    margin:0;
+    margin-left: 5px
+  }
+  
+  
+  #characterDisplay
+  {
+    background-color: royalblue;
+    display: none;
+  }
+  
+  #screen
+  {
+    width: 90%;
+    height: 200px;
+    margin:0 auto;
+    align-self: center;
+    font-size: 1.3rem;
+  }
+  
+  #gameScreen
+  {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    
+  }
+  
+  #button-area > div
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 0px;
+    column-gap: 0;
+    padding: 0;
+    align-items: center;
+    margin-top: 0;
+  }
+  
+  .choice{
+  
+      width: 250px;
+      height: 100px;
+      font-size: 1rem;
+  
+  
+  }
+  
+  #time
+  {
+  
+    background-color:transparent;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    justify-items: center;
+    align-self: end;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 1rem;
+  }
+
+  h2{
+    font-size: 10px;
+  }
+
+  #bank > span,
+#bank
+{
+  font-size: 20px;
+}
+  
+
+#lifeLines > div
+{
+  margin-bottom: 20px;
+}
+  }
+
+  
+@media (max-width: 575.98px) {
+  #characterDiv
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: scroll;
+    row-gap: 40px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    padding-bottom: 20px;
+    
+  }
+
+
+
+  #characterDiv::-webkit-scrollbar {
+    display: none;
+  }
+
+  #homePage
+  {
+    width: 100%;
+    height: 38.5vh;
+    
+  }
+
+  #homePageDiv
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+  }
+
+  .gameDisplay
+{
+  display: grid;
+  grid-template-columns: 100% ;
+  grid-template-rows: 100px 1fr 1fr ;
+  grid-template-areas:
+  " moneyDiv moneyDiv" 
+  " actionBtn actionBtn"
+  " gameScreen gameScreen"
+  ;
+  height: 100vh;
+    /*background-color: rgba(0,64,82,255);*/
+  
+}
+
+#roundPage
+{
+  
+  height: 38.5vh;
+  width: 100%;
+
+}
+
+#roundPageDiv
+{
+  
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  width: 100%;
+  background-color: black;
+}
+
+.roundPosition
+{
+  font-size: 2rem;
+  width: 100%;
+}
+
+/*#roundOneCashDiv > div > div
+{
+  display: grid;
+  grid-template-columns: 50px;
+  
+}*/
+#roundOneCashDiv
+{
+  width: 100%;
+  margin: 0;
+
+}
+
+#moneyDiv
+{
+  padding: 10px;
+}
+#moneyDiv > div > div:nth-child(1)  > div
+{
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  justify-items: start;
+}
+
+#roundTwoCashDiv > div
+{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  justify-items: start;
+}
+
+#characterDisplay
+{
+  display: none;
+}
+
+#moneyDiv
+{
+  width: 100%;
+  margin: 0;
+}
+
+.choice{
+  width: 150px;
+  height: 50px;
+  font-size: 1rem;
+}
+
+.cash-div
+{
+  width: 60px;
+  height: 60px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  border:2px solid orangered;
+  border-radius:50px;
+  margin-top: 10px;
+  margin-left: 0;
+
+}
+
+
+
+h2
+{
+  font-size: 10px;
+}
+
+#actionBtn
+{
+  display: grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  margin-top: 100px;
+  margin-left:20px;
+  height: 50px;
+  margin-bottom: 24.3px;
+  column-gap: 20px;
+  
+}
+
+.roundPosition{
+  font-size: 1.3rem;
+  width: 100%;
+  height: 100%;
+  
+}
+
+#screen
+{
+  width: 90%;
+  margin:0 auto;
+  font-size:1.3rem;
+}
+
+
+  
+#button-area > div
+{
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10px;
+}
+
+#button-area
+{
+  margin-bottom: 5px;
+  margin-top:5px;
+  padding-bottom:20px;
+}
+
+#time
+{
+
+  background-color:transparent;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  justify-items: center;
+  align-self: end;
+  text-align: center;
+  margin-bottom: 10px;
+  color: white;
+
+}
+
+
+#lifeLines > div
+{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  column-gap: 20px;
+}
+
+#bank > span,
+#bank
+{
+  font-size: 20px;
+}
+
+
+}
+
+
+
+@media (max-width: 991.98px) { 
+  .character
+  {
+    
+    width:150px;
+    height: 150px;
+    border: 5px solid black;
+  }
+
+  .gameDisplay
+  {
+     display: grid;
+      grid-template-columns:  1fr 150px;
+      grid-template-rows:1fr 1fr 1fr 1fr ;
+      grid-template-areas: 
+      "moneyDiv moneyDiv moneyDiv moneyDiv "
+      " gameScreen gameScreen actionBtn"
+      " gameScreen gameScreen actionBtn"
+      " gameScreen gameScreen actionBtn";
+      height: 100vh;
+      position: relative;
+      /*background-color: rgba(0,64,82,255);*/
+      
+  }
+
+  #characterDisplay
+  {
+    display: none;
+  }
+
+  
+
+  #gameScreen
+  {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin-left: 20px;
+    
+  }
+
+  #button-area
+  {
+    height: 100%;
+  }
+  
+  #button-area >div 
+  {
+    height: 100%;
+    grid-template-columns: 1fr;
+    align-items: center;
+    row-gap: 0;
+    margin-top: 0;
+  }
+
+  .choice
+  {
+    width: 250px;
+    height: 50px;
+    margin: 0;
+  }
+
+  .cash-div
+  {
+    width: 60px;
+    height: 60px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    border:2px solid orangered;
+    border-radius:50px;
+    margin-top: 10px;
+  }
+
+  #time
+  {
+    margin-right: 10px;
+  }
+
+  #screen
+  {
+    height: auto;
+  }
+
+ }
+
+@media (max-width: 400px) { 
+
+ #characterPage
+ {
+   height: auto;
+ }
+  .gameDisplay
+  {
+    display: grid;
+    grid-template-columns: 100% ;
+    grid-template-rows: 100px 2fr 1fr ;
+    grid-template-areas:
+    " moneyDiv moneyDiv" 
+    " actionBtn actionBtn"
+    " gameScreen gameScreen"
+    ;
+    height: 100vh;
+      /*background-color: rgba(0,64,82,255);*/
+    
+
+  }
+  #gameScreen
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-left:0;
+    height: 100%;
+   align-self: start;
+   padding: 0;
+   width: 100vw;
+  }
+
+  #moneyDiv > div > div:nth-child(1)  > div
+  {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    justify-items: start;
+  }
+
+  #actionBtn
+  {
+    padding-top: 13px;
+    
+    
+  }
+  #moneyDiv
+{
+  width: 100%;
+  margin: 0;
+  padding: 5;
+}
+
+#characterDisplay
+{
+  display: none;
+  margin: 0;
+
+}
+
+#button-area {
+  overflow: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  
+
+}
+
+#screen
+{
+  height: auto;
+  font-size: 1rem;
+  padding:40px;
+  margin-top:15px
+}
+  .choice
+  {
+    width: 300px;
+    height: auto;
+    padding: 10px;
+  }
+}
+
+
+ 
+
+
+ 
+
+/*Medium devices (tablets, less than 992px)*/
+
+/*Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { 
+
+  .character
+  {
+    
+    width:100px;
+    height: 100px;
+    border: 5px solid black;
+  }
+  
+  .roundPosition
+  {
+    font-size: 2rem;
+    
+  }
+  
+  .gameDisplay
+  {
+     display: grid;
+      grid-template-columns: 100px 400px 1fr 150px;
+      grid-template-rows:1fr 1fr 1fr 1fr ;
+      grid-template-areas: 
+      "moneyDiv moneyDiv moneyDiv moneyDiv "
+      "characterDisplay gameScreen gameScreen actionBtn"
+      "characterDisplay gameScreen gameScreen actionBtn"
+      "characterDisplay gameScreen gameScreen actionBtn";
+      height: 100vh;
+      position: relative;
+      background-color: rgba(0,64,82,255);
       
   }
   
@@ -526,201 +1141,7 @@ color: white;
   font-size: 1rem;
   }
   
-  }
-
-  
-@media (max-width: 575.98px) {
-  #characterDiv
-  {
-    display: grid;
-    grid-template-columns: 1fr;
-    overflow: scroll;
-    row-gap: 40px;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    padding-bottom: 20px;
-    
-  }
-
-  #characterDiv::-webkit-scrollbar {
-    display: none;
-  }
-
-  #homePage
-  {
-    width: 100%;
-    height: 38.5vh;
-    
-  }
-
-  #homePageDiv
-  {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-    height: 100vh;
-    background-color: black;
-  }
-
-  .gameDisplay
-{
-  display: grid;
-  grid-template-columns: 100% ;
-  grid-template-rows: 100px 1fr 1fr ;
-  grid-template-areas:
-  " moneyDiv moneyDiv" 
-  " actionBtn actionBtn"
-  " gameScreen gameScreen"
-  ;
-  height: 100vh;
-    /*background-color: rgba(0,64,82,255);*/
-    
-}
-
-#roundPage
-{
-  
-  height: 38.5vh;
-  width: 100%;
-
-}
-
-#roundPageDiv
-{
-  
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  width: 100%;
-  background-color: black;
-}
-
-.roundPosition
-{
-  font-size: 2rem;
-  width: 100%;
-}
-
-/*#roundOneCashDiv > div > div
-{
-  display: grid;
-  grid-template-columns: 50px;
-  
-}*/
-#roundOneCashDiv
-{
-  width: 100%;
-  
-}
-
-#moneyDiv > div > div:nth-child(1)  > div
-{
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-  justify-items: center;
-}
-
-#roundTwoCashDiv > div
-{
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  justify-items: center;
-}
-
-#characterDisplay
-{
-  display: none;
-}
-
-#moneyDiv
-{
-  width: 100%;
-}
-
-.choice{
-  width: 150px;
-  height: 50px;
-}
-
-.cash-div
-{
-  width: 60px;
-  height: 60px;
-  font-size: 15px;
-  margin-bottom: 10px;
-  border:2px solid orangered;
-  border-radius:50px;
-  margin-top: 10px;
-}
-
-.bank-btn
-{
-  font-size: 0.6rem;
-}
-
-#actionBtn
-{
-  display: grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  margin-top: 20px;
-  margin-left:20px;
-  height: 50px;
-  margin-bottom: 24.3px;
-  column-gap: 20px;
-}
-
-.roundPosition{
-  font-size: 1.3rem;
-  width: 100%;
-  height: 100%;
-  
-}
-
-#screen
-{
-  width: 90%;
-  margin:0 auto
-}
+  }*/
 
 
   
-#button-area > div
-{
-  grid-template-columns: 1fr 1fr;
-  row-gap: 10px;
-}
-
-#button-area
-{
-  margin-bottom: 5px;
-  margin-top:5px;
-  padding-bottom:20px;
-}
-
-#time
-{
-
-  background-color:transparent;
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-  justify-items: center;
-  align-self: end;
-  text-align: center;
-  margin-bottom: 10px;
-color: white;
-}
-
-
-
-#lifeLines > div
-{
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  column-gap: 20px;
-}
-
-
- }

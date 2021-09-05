@@ -11,6 +11,7 @@ import BankContext from '../context/BankContext';
 import HomeScreenContext from '../context/HomeScreeContext';
 import PauseContext from '../context/PauseContext';
 import StartTimerContext from '../context/StartTimerContext';
+import ClockContext from '../context/ClockContext';
 import {timer,timeCheck} from '../utils/time'
 
 const Character = (props) => {
@@ -26,6 +27,7 @@ const Character = (props) => {
     const {characterPage,setCharacterPage} = useContext(CharacterPageContext);
     const {characterDisplay,setCharacterDisplay} = useContext(CharacterDisplayContext);
     const {startTimer, setStartTimer} = useContext(StartTimerContext)
+    const {clock,setClock} = useContext(ClockContext)
     const [start ,setStart] = useState(true)
     const {pause, setPause} = useContext(PauseContext)
     const image = require(`../images/${props.proPic}`).default
@@ -73,7 +75,13 @@ const Character = (props) => {
             setRoundPageVisible(true);
             displayRound(evt);
             setRoundText('Round One')
-            setStartTimer(true)
+            setStartTimer(true) 
+            setClock({
+                minute:0,
+                second:0,
+                second2:0
+              })
+
             
 
                
