@@ -15,7 +15,9 @@ import GameDisplayContext from '../context/GameDisplayContext'
 import HomeScreenContext from '../context/HomeScreeContext'
 import WinCounterContext from '../context/WinCounterContext'
 import WinScreenDisplayContext from '../context/WinScreenDisplayContext'
-import { valAssignment } from '../utils/ButtonUtils'
+import WinnerContext from '../context/WinnerContext'
+import {valAssignment}  from '../utils/ButtonUtils'
+import { parseEntities } from 'parse-entities'
 
 const AnswerButtons = (props) => {
 
@@ -34,6 +36,7 @@ const AnswerButtons = (props) => {
     const {roundTwoCash,setRoundTwoCash}= useContext(RoundTwoCashContext);
     const {isClicked,setIsClicked} = useContext(CallAFriendContext)
     const {winCounter,setWinCounter} = useContext(WinCounterContext)
+    const {winner,setWinner} = useContext(WinnerContext)
     const {winScreenDisplay,setWinScreenDisplay} = useContext(WinScreenDisplayContext)
     const {color} = useContext(ColorContext)
 
@@ -168,7 +171,21 @@ const buttonColorReset = ()=>
     setResultButton(button)
 }
 
-
+const entityCleanupAndAssignment =(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)=>{
+    let Question = parseEntities(newQuestion)
+    let newAnswer = parseEntities(answer)
+  
+    let wrong = [...incorrectAnswers]
+    let wrongAnswers = [];
+  
+    for(let i =0; i < wrong.length; i++){
+        let cleanedWrongAnswer = wrong[i]
+        cleanedWrongAnswer = parseEntities(cleanedWrongAnswer)
+        wrongAnswers.push(cleanedWrongAnswer)
+    }
+    
+    valAssignment(Question,newAnswer,wrongAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
+  }
 
 const apiFetch = ()=>
 {
@@ -184,9 +201,9 @@ const apiFetch = ()=>
                 const answer = json.results[rand].correct_answer;
                 const incorrectAnswers = json.results[rand].incorrect_answers;
 
-
+                entityCleanupAndAssignment(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
                 
-                valAssignment(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
+                
                 
 
 
@@ -213,10 +230,9 @@ const winCheck = ()=>
     {
         setWinScreenDisplay({visibility:true})
         setGameScreen({visible:false});
+        setWinner(true)
     }
-    else{
-        setWinCounter({counter:win})
-    }
+    
 }
 
 
@@ -269,6 +285,7 @@ const winCheck = ()=>
                     setRoundText("Game Over");
                     setRoundPageVisible(true);
                     setRound(1)
+                    setWinner(false)
 
                     let time = 0
                     const interval = setInterval(()=>{

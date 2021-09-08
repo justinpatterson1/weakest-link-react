@@ -35,13 +35,16 @@ import WinCounterContext from '../context/WinCounterContext'
 import WinnerScreen from '../components/WinnerScreen';
 import WinScreenDisplayContext from '../context/WinScreenDisplayContext';
 import ClockContext from '../context/ClockContext'
+import ResumeContext from '../context/ResumeContext';
+import {parseEntities} from 'parse-entities'
+import WinnerContext from '../context/WinnerContext';
 import {apiFetch} from '../utils/ApiUtil'
 
 
 
 function App() {
   const [audience,setAudience] = useState(null);
-  const [round,setRound] = useState(1);
+  const [round,setRound] = useState(2);
   const [bank,setBank] = useState(0);
   const [time,setTime] = useState("");
   const [time2,setTime2] = useState("");
@@ -64,6 +67,8 @@ function App() {
   const [winCounter,setWinCounter] = useState({counter:0})
   const [winScreenDisplay,setWinScreenDisplay] = useState({visibility:false})
   const [pauseScreenVisible,setPauseScreenVisible] = useState({visibility:false})
+  const [resumeGame,setResumeGame] = useState(false);
+  const [winner,setWinner] = useState(false)
   const [clock,setClock] = useState({
     minute:0,
     second:0,
@@ -200,7 +205,13 @@ const [character,setCharacter] = useState([
 
 
 useEffect(() => {
+  if(localStorage.getItem("Resume")){
+    
+    const resume = JSON.parse(localStorage.getItem("Round"))
+    setResumeGame(resume)
+  }
   
+ 
   let interval = null;
   let timeValues = clock
   let min= timeValues.minute;
@@ -238,13 +249,13 @@ useEffect(() => {
                    min++
               
               }
-              if(time==9)
+              if(time===9)
               {
                    sec++;
                    time=0;
               }
   
-              if(min == 2 || round == 2)
+              if(min === 2 || round === 2)
               {
                   min=0;
                   time=0;
@@ -352,6 +363,7 @@ useEffect(() => {
             setRoundText("Game Over")
             setRoundPageVisible(true)
             
+            
             setRound(1)
 
             let roundTime = 0
@@ -365,7 +377,8 @@ useEffect(() => {
                     clearInterval(roundInterval)
 
                     setRoundPageVisible(false)
-                    setHomeScreen({visibile:true});
+                    //setHomeScreen({visibile:true});
+                    setWinScreenDisplay(true)
                    interval2 = null
 
                     setClock({
@@ -433,6 +446,23 @@ clearInterval(interval2)
   }
 }, [startTimer,pause])
 
+
+const entityCleanup =(newQuestion,answer,incorrectAnswers)=>{
+  let Question = parseEntities(newQuestion)
+  let newAnswer = parseEntities(answer)
+
+  let wrong = [...incorrectAnswers]
+  let wrongAnswers = [];
+
+  for(let i =0; i < wrong.length; i++){
+      let cleanedWrongAnswer = wrong[i]
+      cleanedWrongAnswer = parseEntities(cleanedWrongAnswer)
+      wrongAnswers.push(cleanedWrongAnswer)
+  }
+  
+  valAssignment(Question,newAnswer,wrongAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
+}
+
 console.log("question:" + question)
 console.log("wrong answers:" + wrongAnswer)
 
@@ -449,9 +479,7 @@ useEffect(()=>{
       const answer = json.results[rand].correct_answer;
       const incorrectAnswers = json.results[rand].incorrect_answers;
 
-
-      
-     valAssignment(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
+      entityCleanup(newQuestion,answer,incorrectAnswers)
      
 
 
@@ -491,14 +519,16 @@ useEffect(()=>{
                                                         <WinCounterContext.Provider value={{winCounter,setWinCounter}}>
                                                           <WinScreenDisplayContext.Provider value={{winScreenDisplay,setWinScreenDisplay}}>
                                                                <ClockContext.Provider value={{clock,setClock}}>
-                                                                
+                                                                <ResumeContext.Provider value={{resumeGame,setResumeGame}}>
+                                                                  <WinnerContext.Provider value={{winner,setWinner}}>
                                                                 <HomePage/>
                                                                 <CharacterPage/>
                                                                 <RoundPage round={roundText} />
                                                                 <GameScreen/>
                                                                 <PauseScreen/>
                                                                 <WinnerScreen/>
-
+                                                                </WinnerContext.Provider>
+                                                                </ResumeContext.Provider>
                                                                 </ClockContext.Provider>
                                                               </WinScreenDisplayContext.Provider>
                                                         </WinCounterContext.Provider>

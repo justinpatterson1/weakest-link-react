@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+h1
+{
+  font-size: 2rem;
+}
 .hide
 {
   display: none;
@@ -318,6 +322,11 @@ color: white;
   height: 100%;
 }
 
+#audienceGraphModal
+{
+  z-index: 10;
+}
+
 #gamer
 {
   position: relative;
@@ -416,10 +425,75 @@ color: white;
 }
 
  
+@media (max-width: 1498.98px) {
+  #homePage
+  {
+    width: 100%;
+    height: 90vh;
+    
+  }
+  #homePageDiv
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+  }
 
+  .choice{
+    width: 250px;
+    height: 150px;
+    font-size: 1.7rem;
+  }
+
+  #screen
+  {
+    font-size: 1.7rem;
+  }
+  
+  .graphModalContent
+{
+  background-color:white;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  
+}
+
+#audienceModalDiv
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+}
  
 /*Large devices (desktops, less than 1200px)*/
 @media (max-width: 1199.98px) { 
+  #winScreen > div:nth-child(3)
+  {
+    align-items: center;
+    height: 100%;
+  }
+  #homePage
+  {
+    width: 100%;
+    height: 50vh;
+    
+  }
+  #homePageDiv
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+  }
+
   #moneyDiv > div > div:nth-child(1) > div
   {
     display: grid;
@@ -431,10 +505,16 @@ color: white;
    {
     
    }
-
+   #characterDisplay
+   {
+     padding-left: 10px;
+     justify-self: center;
+     margin-left: 10px;
+   }
    #characterDisplay > div> img
    {
      height: 600px;
+     
    }
    
    .gameDisplay
@@ -497,6 +577,64 @@ color: white;
   font-size: 40px;
 }
 
+#winnerSceenImage{
+  width: 400px;
+  height: 500px;
+}
+
+#winScreen > div:nth-child(2) 
+{
+  align-items: center;
+  height: 70%;
+
+}
+
+#winScreen > div > h1
+{
+  font-size: 2rem;
+}
+#winScreen > div:nth-child(2) > div:nth-child(2) 
+{
+  row-gap: 10px;
+}
+
+.winScreenBtn 
+{
+  width: 200px;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  
+}
+
+#winnings
+{
+  font-size: 1.7rem;
+}
+
+#winScreen > div:nth-child(3)
+  {
+    align-items: center;
+    height: 100%;
+  }
+
+  .graphModalContent
+  {
+    background-color:white;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    align-items: center;
+    justify-items: center;
+    
+  }
+  
+  #audienceModalDiv
+  {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
  }
 
 
@@ -631,10 +769,377 @@ color: white;
 {
   margin-bottom: 20px;
 }
+
+#winnerSceenImage{
+  width: 200px;
+  height: 200px;
+}
+
+#winScreen > div:nth-child(2)
+{
+  align-items: start;
+  height: 70%;
+
+}
+
+#winScreen > div:nth-child(2) > div:nth-child(2) 
+{
+  row-gap: 10px;
+}
+
+#winScreen > div:nth-child(3)
+  {
+    align-items: center;
+    height: 100%;
+  }
+
+  .graphModalContent
+{
+  background-color:white;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  
+}
+
+#audienceModalDiv
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+  }
+
+
+
+
+
+@media (max-width: 991.98px) { 
+
+  .graphModalContent
+{
+  background-color:white;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  
+}
+
+#audienceModalDiv
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+  .character
+  {
+    
+    width:150px;
+    height: 150px;
+    border: 5px solid black;
+  }
+
+  .gameDisplay
+  {
+     display: grid;
+      grid-template-columns:  1fr 150px;
+      grid-template-rows:1fr 1fr 1fr 1fr ;
+      grid-template-areas: 
+      "moneyDiv moneyDiv moneyDiv moneyDiv "
+      " gameScreen gameScreen actionBtn"
+      " gameScreen gameScreen actionBtn"
+      " gameScreen gameScreen actionBtn";
+      height: 100vh;
+      position: relative;
+      /*background-color: rgba(0,64,82,255);*/
+      
+  }
+
+  #characterDisplay
+  {
+    display: none;
   }
 
   
+
+  #gameScreen
+  {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin-left: 20px;
+    
+  }
+
+  #button-area
+  {
+    height: 100%;
+  }
+  
+  #button-area >div 
+  {
+    height: 100%;
+    grid-template-columns: 1fr;
+    align-items: center;
+    row-gap: 0;
+    margin-top: 0;
+  }
+
+  .choice
+  {
+    width: 250px;
+    height: auto;
+    margin: 0;
+  }
+
+  .cash-div
+  {
+    width: 60px;
+    height: 60px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    border:2px solid orangered;
+    border-radius:50px;
+    margin-top: 10px;
+  }
+
+  #time
+  {
+    margin-right: 10px;
+  }
+
+  #screen
+  {
+    height: 100%;
+  }
+
+  #winnerSceenImage{
+    width: 200px;
+    height: 200px;
+  }
+ }
+
+
+ 
+/*Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) { 
+
+  .character
+  {
+    
+    width:100px;
+    height: 100px;
+    border: 5px solid black;
+  }
+  
+  .roundPosition
+  {
+    font-size: 2rem;
+    
+  }
+  
+  .gameDisplay
+  {
+     display: grid;
+      grid-template-columns: 50px 400px 1fr 150px;
+      grid-template-rows:1fr 1fr 1fr 1fr ;
+      grid-template-areas: 
+      "moneyDiv moneyDiv moneyDiv moneyDiv "
+      "characterDisplay gameScreen gameScreen actionBtn"
+      "characterDisplay gameScreen gameScreen actionBtn"
+      "characterDisplay gameScreen gameScreen actionBtn";
+      height: 100vh;
+      position: relative;
+      /*background-color: rgba(0,64,82,255);*/
+      
+  }
+  
+  .cash-div
+  {
+    width: 60px;
+    height: 60px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    border:2px solid orangered;
+    border-radius:50px;
+    margin-top: 10px;
+  }
+  
+  #moneyDiv > div > div:nth-child(1) ,
+  #moneyDiv > div:nth-child(1) 
+  {
+    
+    width: 80%;
+ 
+    margin: 0 auto;
+  }
+  
+  #moneyDiv 
+  {
+    
+    margin:0 auto;
+    width: 100%;
+  }
+  
+  
+  #characterDisplay
+  {
+    background-color: royalblue;
+    display: none;
+  }
+  
+  #screen
+  {
+    width: 200px;
+    height: 200px;
+    margin:0 auto;
+    align-self: left;
+    font-size: 1.3rem;
+    margin-left: 10px;
+  }
+  
+  #gameScreen
+  {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    
+  }
+  
+  #button-area > div
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 0px;
+    column-gap: 0;
+    padding: 0;
+    align-items: center;
+    margin-top: 0;
+  }
+  
+  .choice{
+  
+      width: 250px;
+      height: 50px;
+      font-size: 1rem;
+  
+  
+  }
+  
+  #time
+  {
+  
+    background-color:transparent;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    justify-items: center;
+    align-self: end;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 1rem;
+  }
+
+  h2{
+    font-size: 10px;
+  }
+
+  #bank > span,
+#bank
+{
+  font-size: 20px;
+}
+  
+
+#lifeLines > div
+{
+  margin-bottom: 20px;
+}
+
+#winnerSceenImage{
+  width: 200px;
+  height: 200px;
+}
+
+#winScreen > div:nth-child(2)
+{
+  align-items: start;
+  height: 70%;
+
+}
+
+#winScreen > div:nth-child(2) > div:nth-child(2) 
+{
+  row-gap: 10px;
+}
+
+#winScreen > div:nth-child(3)
+  {
+    align-items: center;
+    height: 100%;
+  }
+
+  .graphModalContent
+{
+  background-color:white;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  
+}
+
+#audienceModalDiv
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+  }
+
+   
 @media (max-width: 575.98px) {
+
+  .graphModalBody
+{
+  background-color: rgba(128, 128, 128, 0.459);
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+}
+
+.graphModalContent
+{
+  background-color:white;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-items: center;
+  
+}
+
+#audienceModalDiv
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+#gamer
+{
+  position: relative;
+}
+
+
   #characterDiv
   {
     display: grid;
@@ -673,7 +1178,7 @@ color: white;
 {
   display: grid;
   grid-template-columns: 100% ;
-  grid-template-rows: 100px 1fr 1fr ;
+  grid-template-rows: 100px 100px 1fr ;
   grid-template-areas:
   " moneyDiv moneyDiv" 
   " actionBtn actionBtn"
@@ -683,7 +1188,22 @@ color: white;
     /*background-color: rgba(0,64,82,255);*/
   
 }
+#gameScreen
+{
 
+  display: grid;
+    grid-template-columns: 1fr;
+    margin-left:0;
+    height: 100%;
+   align-self: start;
+   padding: 0;
+   width: 100vw;
+  }
+
+  #button-area > div{
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
 #roundPage
 {
   
@@ -730,11 +1250,13 @@ color: white;
   display: grid;
   grid-template-columns: repeat(5,1fr);
   justify-items: start;
+  align-items: start;
 }
 
 #roundTwoCashDiv > div
 {
   display: grid;
+  align-items: start;
   grid-template-columns: repeat(4,1fr);
   justify-items: start;
 }
@@ -800,22 +1322,21 @@ h2
 #screen
 {
   width: 90%;
+  height: auto;
   margin:0 auto;
   font-size:1.3rem;
+  margin-top: 80px;
+  padding: 35px;
 }
 
 
   
-#button-area > div
-{
-  grid-template-columns: 1fr 1fr;
-  row-gap: 10px;
-}
+
 
 #button-area
 {
-  margin-bottom: 5px;
-  margin-top:5px;
+  margin-bottom: 0px;
+  margin-top:0px;
   padding-bottom:20px;
 }
 
@@ -848,96 +1369,101 @@ h2
   font-size: 20px;
 }
 
-
+#winnerSceenImage{
+  width: 200px;
+  height: 300px;
 }
 
+#winScreen > div:nth-child(2)
+{
+  align-items: center;
+  height: 100%;
+}
 
+#winScreen > div:nth-child(2) > div:nth-child(2) 
+{
+  row-gap: 10px;
+}
 
-@media (max-width: 991.98px) { 
-  .character
+#winScreen > div:nth-child(3)
   {
-    
-    width:150px;
-    height: 150px;
-    border: 5px solid black;
-  }
-
-  .gameDisplay
-  {
-     display: grid;
-      grid-template-columns:  1fr 150px;
-      grid-template-rows:1fr 1fr 1fr 1fr ;
-      grid-template-areas: 
-      "moneyDiv moneyDiv moneyDiv moneyDiv "
-      " gameScreen gameScreen actionBtn"
-      " gameScreen gameScreen actionBtn"
-      " gameScreen gameScreen actionBtn";
-      height: 100vh;
-      position: relative;
-      /*background-color: rgba(0,64,82,255);*/
-      
-  }
-
-  #characterDisplay
-  {
-    display: none;
-  }
-
-  
-
-  #gameScreen
-  {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    margin-left: 20px;
-    
-  }
-
-  #button-area
-  {
-    height: 100%;
-  }
-  
-  #button-area >div 
-  {
-    height: 100%;
-    grid-template-columns: 1fr;
     align-items: center;
-    row-gap: 0;
-    margin-top: 0;
+    height: 100%;
   }
-
-  .choice
-  {
-    width: 250px;
-    height: 50px;
-    margin: 0;
-  }
-
-  .cash-div
-  {
-    width: 60px;
-    height: 60px;
-    font-size: 15px;
-    margin-bottom: 10px;
-    border:2px solid orangered;
-    border-radius:50px;
-    margin-top: 10px;
-  }
-
-  #time
-  {
-    margin-right: 10px;
-  }
-
-  #screen
-  {
-    height: auto;
-  }
-
- }
+}
 
 @media (max-width: 400px) { 
+  #moneyDiv
+  {
+    width: 100%;
+    margin-top: 0px;
+  }
+  #moneyDiv > div:nth-child(1),
+  #moneyDiv > div:nth-child(1)>div:nth-child(1)
+  {
+   
+    width: 100%;
+  }
+  #moneyDiv > div:nth-child(1)>div:nth-child(1) > div
+  {
+  
+    width: 100%;
+    justify-items: start;
+  }
+  
+  #winScreen > div:nth-child(3)
+  {
+    align-items: center;
+    height: 100%;
+  }
+
+  #winScreen > div > h1
+  {
+      font-size: 1.5rem;
+  }
+  #winnings > h1
+  {
+    font-size: 1.5rem;
+  }
+  #winnerSceenImage{
+    width: 200px;
+    height: 200px;
+  }
+  
+  #winScreen > div:nth-child(2)
+  {
+    align-items: center;
+    height: 70%;
+    width: 100%;
+  
+  }
+  
+  #winScreen > div:nth-child(2) > div:nth-child(2) 
+  {
+    row-gap: 10px;
+  }
+
+  .winScreenBtn
+  {
+    width: 100px;
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  #homePage
+  {
+    width: 100%;
+    height: 20vh;
+    
+  }
+  #homePageDiv
+  {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+  }
 
  #characterPage
  {
@@ -947,7 +1473,7 @@ h2
   {
     display: grid;
     grid-template-columns: 100% ;
-    grid-template-rows: 100px 2fr 1fr ;
+    grid-template-rows: 50px 2fr 1fr ;
     grid-template-areas:
     " moneyDiv moneyDiv" 
     " actionBtn actionBtn"
@@ -972,7 +1498,7 @@ h2
   #moneyDiv > div > div:nth-child(1)  > div
   {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(5,1fr);
     justify-items: start;
   }
 

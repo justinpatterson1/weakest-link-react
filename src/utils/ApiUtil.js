@@ -1,4 +1,6 @@
 import { valAssignment } from "./ButtonUtils";
+import { entityCleanupAndAssignment } from "./ButtonUtils";
+
 const apiFetch = (setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)=>
 {
     const ENDPOINT ="https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple";
@@ -13,9 +15,9 @@ const apiFetch = (setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setRe
                 const answer = json.results[rand].correct_answer;
                 const incorrectAnswers = json.results[rand].incorrect_answers;
 
-
+                entityCleanupAndAssignment(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
                 
-                valAssignment(newQuestion,answer,incorrectAnswers,setQuestion,setCorrectAnswer,setWrongAnswer,resultButton,setResultButton)
+        
                 
 
 
