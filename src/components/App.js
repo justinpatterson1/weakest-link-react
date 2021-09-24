@@ -357,12 +357,13 @@ useEffect(() => {
         setRoundPageVisible(true)*/
         
 
-        if(bank == 0){
+        if(bank == 0){ 
             
             setGameScreen({visible:false})
             setRoundText("Game Over")
             setRoundPageVisible(true)
             
+            //hi
             
             setRound(1)
 
